@@ -15,6 +15,7 @@
 		18CEB0681B6A740F00190016 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18CEB0661B6A740F00190016 /* LaunchScreen.storyboard */; };
 		18CEB0731B6A740F00190016 /* WeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CEB0721B6A740F00190016 /* WeatherTests.swift */; };
 		18CEB07E1B6A740F00190016 /* WeatherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CEB07D1B6A740F00190016 /* WeatherUITests.swift */; };
+		18CEB08C1B6A749500190016 /* CityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CEB08B1B6A749400190016 /* CityTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		18CEB0791B6A740F00190016 /* WeatherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18CEB07D1B6A740F00190016 /* WeatherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherUITests.swift; sourceTree = "<group>"; };
 		18CEB07F1B6A740F00190016 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18CEB08B1B6A749400190016 /* CityTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				18CEB0661B6A740F00190016 /* LaunchScreen.storyboard */,
 				18CEB0691B6A740F00190016 /* Info.plist */,
 				18CEB0611B6A740F00190016 /* Weather.xcdatamodeld */,
+				18CEB08B1B6A749400190016 /* CityTableViewController.swift */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18CEB08C1B6A749500190016 /* CityTableViewController.swift in Sources */,
 				18CEB0631B6A740F00190016 /* Weather.xcdatamodeld in Sources */,
 				18CEB05D1B6A740F00190016 /* ViewController.swift in Sources */,
 				18CEB05B1B6A740F00190016 /* AppDelegate.swift in Sources */,
