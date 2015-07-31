@@ -38,21 +38,21 @@
 
 /* Begin PBXFileReference section */
 		18CEB0571B6A740F00190016 /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		18CEB05A1B6A740F00190016 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		18CEB05A1B6A740F00190016 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Weather/AppDelegate.swift; sourceTree = "<group>"; };
 		18CEB05F1B6A740F00190016 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		18CEB0621B6A740F00190016 /* Weather.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Weather.xcdatamodel; sourceTree = "<group>"; };
-		18CEB0641B6A740F00190016 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		18CEB0641B6A740F00190016 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Weather/Assets.xcassets; sourceTree = "<group>"; };
 		18CEB0671B6A740F00190016 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		18CEB0691B6A740F00190016 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18CEB0691B6A740F00190016 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Weather/Info.plist; sourceTree = "<group>"; };
 		18CEB06E1B6A740F00190016 /* WeatherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18CEB0721B6A740F00190016 /* WeatherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTests.swift; sourceTree = "<group>"; };
 		18CEB0741B6A740F00190016 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18CEB0791B6A740F00190016 /* WeatherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18CEB07D1B6A740F00190016 /* WeatherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherUITests.swift; sourceTree = "<group>"; };
 		18CEB07F1B6A740F00190016 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		18CEB08B1B6A749400190016 /* TripTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripTableViewController.swift; sourceTree = "<group>"; };
-		18CEB0901B6A7E8200190016 /* Trip+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Trip+CoreDataProperties.swift"; path = "../Trip+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		18CEB0911B6A7E8200190016 /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Trip.swift; path = ../Trip.swift; sourceTree = "<group>"; };
+		18CEB08B1B6A749400190016 /* TripTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TripTableViewController.swift; path = Weather/TripTableViewController.swift; sourceTree = "<group>"; };
+		18CEB0901B6A7E8200190016 /* Trip+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Trip+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		18CEB0911B6A7E8200190016 /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +83,15 @@
 		18CEB04E1B6A740F00190016 = {
 			isa = PBXGroup;
 			children = (
-				18CEB0591B6A740F00190016 /* Weather */,
+				18CEB05A1B6A740F00190016 /* AppDelegate.swift */,
+				18CEB05E1B6A740F00190016 /* Main.storyboard */,
+				18CEB0641B6A740F00190016 /* Assets.xcassets */,
+				18CEB0661B6A740F00190016 /* LaunchScreen.storyboard */,
+				18CEB0691B6A740F00190016 /* Info.plist */,
+				18CEB0611B6A740F00190016 /* Weather.xcdatamodeld */,
+				18CEB08B1B6A749400190016 /* TripTableViewController.swift */,
+				18CEB0901B6A7E8200190016 /* Trip+CoreDataProperties.swift */,
+				18CEB0911B6A7E8200190016 /* Trip.swift */,
 				18CEB0711B6A740F00190016 /* WeatherTests */,
 				18CEB07C1B6A740F00190016 /* WeatherUITests */,
 				18CEB0581B6A740F00190016 /* Products */,
@@ -98,22 +106,6 @@
 				18CEB0791B6A740F00190016 /* WeatherUITests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		18CEB0591B6A740F00190016 /* Weather */ = {
-			isa = PBXGroup;
-			children = (
-				18CEB05A1B6A740F00190016 /* AppDelegate.swift */,
-				18CEB05E1B6A740F00190016 /* Main.storyboard */,
-				18CEB0641B6A740F00190016 /* Assets.xcassets */,
-				18CEB0661B6A740F00190016 /* LaunchScreen.storyboard */,
-				18CEB0691B6A740F00190016 /* Info.plist */,
-				18CEB0611B6A740F00190016 /* Weather.xcdatamodeld */,
-				18CEB08B1B6A749400190016 /* TripTableViewController.swift */,
-				18CEB0901B6A7E8200190016 /* Trip+CoreDataProperties.swift */,
-				18CEB0911B6A7E8200190016 /* Trip.swift */,
-			);
-			path = Weather;
 			sourceTree = "<group>";
 		};
 		18CEB0711B6A740F00190016 /* WeatherTests */ = {
@@ -311,6 +303,7 @@
 				18CEB05F1B6A740F00190016 /* Base */,
 			);
 			name = Main.storyboard;
+			path = Weather;
 			sourceTree = "<group>";
 		};
 		18CEB0661B6A740F00190016 /* LaunchScreen.storyboard */ = {
@@ -319,6 +312,7 @@
 				18CEB0671B6A740F00190016 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = Weather;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -525,7 +519,8 @@
 				18CEB0621B6A740F00190016 /* Weather.xcdatamodel */,
 			);
 			currentVersion = 18CEB0621B6A740F00190016 /* Weather.xcdatamodel */;
-			path = Weather.xcdatamodeld;
+			name = Weather.xcdatamodeld;
+			path = Weather/Weather.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
