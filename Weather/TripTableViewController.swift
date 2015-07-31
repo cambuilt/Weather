@@ -45,34 +45,43 @@ class TripTableViewController : UITableViewController
     
     func getWeather() throws -> String
     {
-        
+        let secondsInADay = 86400.0
+
         let apiKey = "10851ae3ab8887d6"
         let urlString = "http://api.wunderground.com/api/\(apiKey)/forecast10day/q/DC/Washington.json"
         var weatherType = ""
+        let thisDate = NSDate().dateByAddingTimeInterval(secondsInADay * 3)
+        let startDate = NSDate()
+        let endDate = NSDate().dateByAddingTimeInterval(secondsInADay * 7)
 
-        guard let url = NSURL(string: urlString) else {
-            throw NSError(domain: "Weather", code: -1, userInfo: nil)
-        }
-        
-        let request = NSURLRequest(URL: url)
-    
-        let dataTask = NSURLSession.init(configuration: NSURLSessionConfiguration.defaultSessionConfiguration()).dataTaskWithRequest(request) { (data:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
-            do {
-                let json = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers) as! NSDictionary
-                let forecast = (json["forecast"] as! NSDictionary)["txt_forecast"] as! NSDictionary
-                print(json)
-                print("test")
-                weatherType = "cloudy"
-
-            } catch {
-                // handle error
+        if thisDate == thisDate.laterDate(startDate) && thisDate != endDate.laterDate(thisDate) {
+            let fromDays = NSCalendar.currentCalendar().ordinalityOfUnit(.Day, inUnit:.Era, forDate: startDate)
+            let toDays = NSCalendar.currentCalendar().ordinalityOfUnit(.Day, inUnit:.Era, forDate: thisDate)
+            let index = (toDays - fromDays) * 2
+            
+            guard let url = NSURL(string: urlString) else {
+                throw NSError(domain: "Weather", code: -1, userInfo: nil)
             }
-
+            
+            let dataTask = NSURLSession.init(configuration: NSURLSessionConfiguration.defaultSessionConfiguration()).dataTaskWithURL(url) { (data:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
+                do {
+                    let json = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers) as! NSDictionary
+                    let forecastday = ((json["forecast"] as! NSDictionary)["txt_forecast"] as! NSDictionary)["forecastday"] as! NSArray
+                    let dayIcon = (forecastday[index] as! NSDictionary)["icon"] as! String
+                    let nightIcon = (forecastday[index + 1] as! NSDictionary)["icon"] as! String
+                    
+                    print(dayIcon)
+                    print(nightIcon)
+                    weatherType = "cloudy"
+                    
+                } catch {
+                    // handle error
+                }
+                
+            }
+            
+            dataTask.resume()
         }
-        
-        dataTask.resume()
-        
-        print(apiKey)
         
         return weatherType
     }

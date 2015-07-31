@@ -196,6 +196,7 @@
 		18CEB04F1B6A740F00190016 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Cam-Built Programming Plus";
 				TargetAttributes = {
@@ -495,6 +496,7 @@
 				18CEB0841B6A740F00190016 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		18CEB0851B6A740F00190016 /* Build configuration list for PBXNativeTarget "WeatherTests" */ = {
 			isa = XCConfigurationList;
@@ -503,6 +505,7 @@
 				18CEB0871B6A740F00190016 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		18CEB0881B6A740F00190016 /* Build configuration list for PBXNativeTarget "WeatherUITests" */ = {
 			isa = XCConfigurationList;
@@ -511,6 +514,7 @@
 				18CEB08A1B6A740F00190016 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
