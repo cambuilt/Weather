@@ -80,7 +80,6 @@ class TripTableViewController : UITableViewController
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        print(tripArray.count)
         return tripArray.count
     }
     
@@ -92,11 +91,22 @@ class TripTableViewController : UITableViewController
         
         if indexPath.row < weatherArray.count {
             let dayImageView = UIImageView(image: UIImage(named: weatherArray[indexPath.row]["Day"]!))
-            dayImageView.frame = CGRect(x: 250, y: -20, width: 50, height: 50)
+            dayImageView.frame = CGRect(x: 250, y: 0, width: 40, height: 40)
             let nightImageView = UIImageView(image: UIImage(named: weatherArray[indexPath.row]["Night"]!))
-            nightImageView.frame = CGRect(x: 300, y: -20, width: 50, height: 50)
+            nightImageView.frame = CGRect(x: 310, y: 0, width: 40, height: 40)
+            let highTempLabel = UILabel(frame: CGRect(x: 250, y: -25, width: 60, height: 40))
+            highTempLabel.font = UIFont.systemFontOfSize(12)
+            let high = weatherArray[indexPath.row]["High"]!
+            highTempLabel.text = "High: \(high)"
+            let lowTempLabel = UILabel(frame: CGRect(x: 310, y: -25, width: 60, height: 40))
+            lowTempLabel.font = UIFont.systemFontOfSize(12)
+            let low = weatherArray[indexPath.row]["Low"]!
+            lowTempLabel.text = "Low: \(low)"
             cell.textLabel?.addSubview(dayImageView)
             cell.textLabel?.addSubview(nightImageView)
+            cell.textLabel?.addSubview(highTempLabel)
+            cell.textLabel?.addSubview(lowTempLabel)
+
 //         	cell.detailTextLabel?.text = weatherArray[indexPath.row]
         }
         
@@ -138,12 +148,15 @@ class TripTableViewController : UITableViewController
                 do {
                     if let jsonData = data {
                         let json = try NSJSONSerialization.JSONObjectWithData(jsonData, options: .MutableContainers) as? NSDictionary
-                        guard let forecastday = ((json!["forecast"] as! NSDictionary)["txt_forecast"] as! NSDictionary)["forecastday"] as? NSArray else {
-                            throw NSError(domain: "Weather", code: -1, userInfo: nil)
+                        print(json)
+                        guard let forecastday = ((json!["forecast"] as! NSDictionary)["simpleforecast"] as! NSDictionary)["forecastday"] as? NSArray else {
+                            throw NSError(domain: "Weather", code: -2, userInfo: nil)
                         }
                         let dayIcon = (forecastday[index] as! NSDictionary)["icon"] as! String
                         let nightIcon = (forecastday[index + 1] as! NSDictionary)["icon"] as! String
-                        self.weatherArray.append(["Day":dayIcon,"Night":nightIcon])
+                        let highTemp = ((forecastday[index] as! NSDictionary)["high"] as! NSDictionary)["fahrenheit"] as! String
+                        let lowTemp = ((forecastday[index] as! NSDictionary)["low"] as! NSDictionary)["fahrenheit"] as! String
+                        self.weatherArray.append(["Day":dayIcon,"Night":nightIcon,"High":highTemp,"Low":lowTemp])
                         self.tripArray.append(trip)
                         
                         if self.tripArray.count == self.tripCount {
