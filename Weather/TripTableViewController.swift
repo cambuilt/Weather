@@ -160,7 +160,10 @@ class TripTableViewController : UITableViewController
                         self.tripArray.append(trip)
                         
                         if self.tripArray.count == self.tripCount {
-                            self.tableView.reloadData()
+                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                self.tableView.reloadData()
+                            })
+                            
                         }
                     } else {
                         errorMessage = "json is nil"
