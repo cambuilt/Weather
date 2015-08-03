@@ -17,9 +17,10 @@ class TripTableViewController : UITableViewController
     var tripCount = 0
     var weatherArray = [[String:String]]()
     var weatherCounter = 0
-    let loadMode = true
+    let loadMode = false
     var alert:UIAlertController!
     var chosenDate:NSDate!
+    var alertShown = false
     
     override func viewDidLoad()
     {
@@ -33,7 +34,7 @@ class TripTableViewController : UITableViewController
         getTrips()
 
         tableView.sectionHeaderHeight = 64
-        tableView.rowHeight = 60
+        tableView.rowHeight = 90
     }
 
     func loadTrips()
@@ -104,27 +105,32 @@ class TripTableViewController : UITableViewController
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "TripCell")
+        let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "TripCell")
         cell.backgroundColor = UIColor(red: 0.9, green: 1.0, blue: 0.9, alpha: 1.0)
-        cell.textLabel?.text = "\(tripArray[indexPath.row].city!), \(tripArray[indexPath.row].state!)"
+        cell.textLabel?.text = " "
+        cell.textLabel?.frame.size.height = 100
+        let cityLabel = UILabel(frame: CGRect(x: 0, y: -10, width: 200, height: 50))
+        cityLabel.font = UIFont.boldSystemFontOfSize(16)
+        cityLabel.text = "\(tripArray[indexPath.row].city!), \(tripArray[indexPath.row].state!)"
+        cell.textLabel?.addSubview(cityLabel)
         
         if indexPath.row < weatherArray.count {
             let dayImageView = UIImageView(image: UIImage(named: weatherArray[indexPath.row]["Day"]!))
-            dayImageView.frame = CGRect(x: 250, y: -3, width: 40, height: 40)
+            dayImageView.frame = CGRect(x: 250, y: 20, width: 40, height: 40)
             
             let nightImageBackgroundView = UIImageView(image: UIImage(named: "nightbackground"))
             nightImageBackgroundView.alpha = 0.3
-            nightImageBackgroundView.frame = CGRect(x: 307, y: -3, width: 40, height: 40)
+            nightImageBackgroundView.frame = CGRect(x: 307, y: 20, width: 40, height: 40)
             
             let nightImageView = UIImageView(image: UIImage(named: weatherArray[indexPath.row]["Night"]!))
-            nightImageView.frame = CGRect(x: 307, y: -3, width: 40, height: 40)
+            nightImageView.frame = CGRect(x: 307, y: 20, width: 40, height: 40)
             
-            let highTempLabel = UILabel(frame: CGRect(x: 250, y: -30, width: 60, height: 40))
+            let highTempLabel = UILabel(frame: CGRect(x: 250, y: -10, width: 60, height: 40))
             highTempLabel.font = UIFont.systemFontOfSize(12)
             let high = weatherArray[indexPath.row]["High"]!
             highTempLabel.text = "High:\(high)"
             
-            let lowTempLabel = UILabel(frame: CGRect(x: 305, y: -30, width: 60, height: 40))
+            let lowTempLabel = UILabel(frame: CGRect(x: 305, y: -10, width: 60, height: 40))
             lowTempLabel.font = UIFont.systemFontOfSize(12)
             let low = weatherArray[indexPath.row]["Low"]!
             lowTempLabel.text = "Low:\(low)"
@@ -134,8 +140,13 @@ class TripTableViewController : UITableViewController
             cell.textLabel?.addSubview(nightImageView)
             cell.textLabel?.addSubview(highTempLabel)
             cell.textLabel?.addSubview(lowTempLabel)
-
-//         	cell.detailTextLabel?.text = weatherArray[indexPath.row]
+            
+            let reportLabel = UILabel(frame: CGRect(x: 0, y: 25, width: 200, height: 80))
+            reportLabel.font = UIFont.systemFontOfSize(12)
+            reportLabel.text = weatherArray[indexPath.row]["Text"]!
+            reportLabel.numberOfLines = 5
+            reportLabel.sizeToFit()
+            cell.textLabel?.addSubview(reportLabel)
         }
         
         return cell
@@ -190,7 +201,8 @@ class TripTableViewController : UITableViewController
                             let nightIcon = (txt_forecastday[index * 2 + 1] as! NSDictionary)["icon"] as! String
                             let highTemp = ((simpleforecastday[index] as! NSDictionary)["high"] as! NSDictionary)["fahrenheit"] as! String
                             let lowTemp = ((simpleforecastday[index] as! NSDictionary)["low"] as! NSDictionary)["fahrenheit"] as! String
-                            self.weatherArray.append(["Day":dayIcon,"Night":nightIcon,"High":highTemp,"Low":lowTemp])
+                            let fcttext = (txt_forecastday[index * 2] as! NSDictionary)["fcttext"] as! String
+                            self.weatherArray.append(["Day":dayIcon,"Night":nightIcon,"High":highTemp,"Low":lowTemp,"Text":fcttext])
                             self.tripArray.append(trip)
                             
                              if self.tripArray.count == self.tripCount {
@@ -214,19 +226,26 @@ class TripTableViewController : UITableViewController
     
     func showError(message:String)
     {
-        alert = UIAlertController(title: "Weather Message", message: message, preferredStyle: UIAlertControllerStyle.ActionSheet)
-        let delay = 4.0 * Double(NSEC_PER_SEC)
-        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        if alertShown == false {
+            print("make alert")
+            alertShown = true
+            alert = UIAlertController(title: "Weather Message", message: message, preferredStyle: UIAlertControllerStyle.ActionSheet)
+            let delay = 4.0 * Double(NSEC_PER_SEC)
+            let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
 
-        dispatch_after(time, dispatch_get_main_queue()) { () -> Void in
-            self.dismissAlert()
+            dispatch_after(time, dispatch_get_main_queue()) { () -> Void in
+                self.dismissAlert()
+            }
+            
+            presentViewController(alert, animated: true, completion: nil)
         }
-        
-        presentViewController(alert, animated: true, completion: nil)
     }
     
     func dismissAlert()
     {
+        print("dismissing")
+        alertShown = false
         dismissViewControllerAnimated(true, completion: nil)
     }
+
 }
