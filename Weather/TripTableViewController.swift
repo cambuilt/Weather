@@ -17,13 +17,21 @@ class TripTableViewController : UITableViewController
     var tripCount = 0
     var weatherArray = [[String:String]]()
     var weatherCounter = 0
+    let loadMode = true
+    var alert:UIAlertController!
+    var chosenDate:NSDate!
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        chosenDate = NSDate().dateByAddingTimeInterval(secondsInADay * 3)
         
-        // loadTrips()
+        if loadMode == true {
+            loadTrips()
+        }
+
         getTrips()
+
         tableView.sectionHeaderHeight = 64
         tableView.rowHeight = 60
     }
@@ -31,9 +39,10 @@ class TripTableViewController : UITableViewController
     func loadTrips()
     {
         do {
-            try Trip.addTrip("New York", state: "NY", startDate: "08/01/2015", endDate: "08/07/2015")
-            try Trip.addTrip("Kitty Hawk", state: "NC", startDate: "08/15/2015", endDate: "08/27/2015")
-            try Trip.addTrip("Freeport", state: "BS", startDate: "08/15/2015", endDate: "08/27/2015")
+            try Trip.addTrip("New York", state: "NY", startDate: "08/03/2015", endDate: "08/15/2015")
+            try Trip.addTrip("Kitty Hawk", state: "NC", startDate: "08/03/2015", endDate: "08/15/2015")
+            try Trip.addTrip("Freeport", state: "BS", startDate: "08/03/2015", endDate: "08/15/2015")
+            try Trip.addTrip("Barrow", state: "AK", startDate: "08/03/2015", endDate: "08/15/2015")
         } catch {
             print(error)
         }
@@ -70,6 +79,16 @@ class TripTableViewController : UITableViewController
         headerLabel.font = UIFont.boldSystemFontOfSize(20.0)
         sectionHeaderView.addSubview(headerLabel)
         
+        let dateFormat = NSDateFormatter()
+        dateFormat.dateFormat = "EEEE, MMMM d"
+        dateFormat.timeZone = NSTimeZone.localTimeZone()
+        let stringDate = dateFormat.stringFromDate(chosenDate)
+        let dateLabel = UILabel(frame: CGRect(x: 240, y: 24, width: 220, height: 32))
+        dateLabel.textColor = UIColor.whiteColor()
+        dateLabel.text = stringDate
+        dateLabel.font = UIFont.boldSystemFontOfSize(12.0)
+        sectionHeaderView.addSubview(dateLabel)
+        
         return sectionHeaderView
     }
     
@@ -91,18 +110,27 @@ class TripTableViewController : UITableViewController
         
         if indexPath.row < weatherArray.count {
             let dayImageView = UIImageView(image: UIImage(named: weatherArray[indexPath.row]["Day"]!))
-            dayImageView.frame = CGRect(x: 250, y: 0, width: 40, height: 40)
+            dayImageView.frame = CGRect(x: 250, y: -3, width: 40, height: 40)
+            
+            let nightImageBackgroundView = UIImageView(image: UIImage(named: "nightbackground"))
+            nightImageBackgroundView.alpha = 0.3
+            nightImageBackgroundView.frame = CGRect(x: 307, y: -3, width: 40, height: 40)
+            
             let nightImageView = UIImageView(image: UIImage(named: weatherArray[indexPath.row]["Night"]!))
-            nightImageView.frame = CGRect(x: 310, y: 0, width: 40, height: 40)
-            let highTempLabel = UILabel(frame: CGRect(x: 250, y: -25, width: 60, height: 40))
+            nightImageView.frame = CGRect(x: 307, y: -3, width: 40, height: 40)
+            
+            let highTempLabel = UILabel(frame: CGRect(x: 250, y: -30, width: 60, height: 40))
             highTempLabel.font = UIFont.systemFontOfSize(12)
             let high = weatherArray[indexPath.row]["High"]!
-            highTempLabel.text = "High: \(high)"
-            let lowTempLabel = UILabel(frame: CGRect(x: 310, y: -25, width: 60, height: 40))
+            highTempLabel.text = "High:\(high)"
+            
+            let lowTempLabel = UILabel(frame: CGRect(x: 305, y: -30, width: 60, height: 40))
             lowTempLabel.font = UIFont.systemFontOfSize(12)
             let low = weatherArray[indexPath.row]["Low"]!
-            lowTempLabel.text = "Low: \(low)"
+            lowTempLabel.text = "Low:\(low)"
+            
             cell.textLabel?.addSubview(dayImageView)
+            cell.textLabel?.addSubview(nightImageBackgroundView)
             cell.textLabel?.addSubview(nightImageView)
             cell.textLabel?.addSubview(highTempLabel)
             cell.textLabel?.addSubview(lowTempLabel)
@@ -130,14 +158,12 @@ class TripTableViewController : UITableViewController
         let urlCity = trip.city!.stringByReplacingOccurrencesOfString(" ", withString: "_")
         let urlString = "http://api.wunderground.com/api/\(apiKey)/forecast10day/q/\(trip.state!)/\(urlCity).json"
 //        let urlString = "http://www.microsoft.com"
-        var errorMessage = ""
-        let thisDate = NSDate().dateByAddingTimeInterval(secondsInADay * 3)
         let startDate = NSDate()
         let endDate = NSDate().dateByAddingTimeInterval(secondsInADay * 7)
 
-        if thisDate == thisDate.laterDate(startDate) && thisDate != endDate.laterDate(thisDate) {
+        if chosenDate == chosenDate.laterDate(startDate) && chosenDate != endDate.laterDate(chosenDate) {
             let fromDays = NSCalendar.currentCalendar().ordinalityOfUnit(.Day, inUnit:.Era, forDate: startDate)
-            let toDays = NSCalendar.currentCalendar().ordinalityOfUnit(.Day, inUnit:.Era, forDate: thisDate)
+            let toDays = NSCalendar.currentCalendar().ordinalityOfUnit(.Day, inUnit:.Era, forDate: chosenDate)
             let index = (toDays - fromDays) * 2
             
             guard let url = NSURL(string: urlString) else {
@@ -148,33 +174,59 @@ class TripTableViewController : UITableViewController
                 do {
                     if let jsonData = data {
                         let json = try NSJSONSerialization.JSONObjectWithData(jsonData, options: .MutableContainers) as? NSDictionary
-                        print(json)
-                        guard let forecastday = ((json!["forecast"] as! NSDictionary)["simpleforecast"] as! NSDictionary)["forecastday"] as? NSArray else {
-                            throw NSError(domain: "Weather", code: -2, userInfo: nil)
-                        }
-                        let dayIcon = (forecastday[index] as! NSDictionary)["icon"] as! String
-                        let nightIcon = (forecastday[index + 1] as! NSDictionary)["icon"] as! String
-                        let highTemp = ((forecastday[index] as! NSDictionary)["high"] as! NSDictionary)["fahrenheit"] as! String
-                        let lowTemp = ((forecastday[index] as! NSDictionary)["low"] as! NSDictionary)["fahrenheit"] as! String
-                        self.weatherArray.append(["Day":dayIcon,"Night":nightIcon,"High":highTemp,"Low":lowTemp])
-                        self.tripArray.append(trip)
                         
-                        if self.tripArray.count == self.tripCount {
-                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                                self.tableView.reloadData()
-                            })
+                        guard let forecast = json!["forecast"] as? NSDictionary,
+                            let simpleforecast = forecast["simpleforecast"] as? NSDictionary,
+                            let simpleforecastday = simpleforecast["forecastday"] as? NSArray,
+                            let txt_forecast = forecast["txt_forecast"] as? NSDictionary,
+                            let txt_forecastday = txt_forecast["forecastday"] as? NSArray
+                        else {
+                            self.showError("10 day forecast is not available for \(trip.city!), \(trip.state!).")
+                            return
+                        }
+                        
+                        if index < simpleforecastday.count {
+                            let dayIcon = (txt_forecastday[index * 2] as! NSDictionary)["icon"] as! String
+                            let nightIcon = (txt_forecastday[index * 2 + 1] as! NSDictionary)["icon"] as! String
+                            let highTemp = ((simpleforecastday[index] as! NSDictionary)["high"] as! NSDictionary)["fahrenheit"] as! String
+                            let lowTemp = ((simpleforecastday[index] as! NSDictionary)["low"] as! NSDictionary)["fahrenheit"] as! String
+                            self.weatherArray.append(["Day":dayIcon,"Night":nightIcon,"High":highTemp,"Low":lowTemp])
+                            self.tripArray.append(trip)
                             
+                             if self.tripArray.count == self.tripCount {
+                                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                    self.tableView.reloadData()
+                                })
+                                
+                             }
                         }
                     } else {
-                        errorMessage = "json is nil"
+                        // errorMessage = "json is nil"
                     }
                 } catch {
-                    print("getWeather error: \(error)")
+                    print(error)
                 }
             }
             
-            print(errorMessage)
             dataTask.resume()
         }
+    }
+    
+    func showError(message:String)
+    {
+        alert = UIAlertController(title: "Weather Message", message: message, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let delay = 4.0 * Double(NSEC_PER_SEC)
+        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+
+        dispatch_after(time, dispatch_get_main_queue()) { () -> Void in
+            self.dismissAlert()
+        }
+        
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func dismissAlert()
+    {
+        dismissViewControllerAnimated(true, completion: nil)
     }
 }
