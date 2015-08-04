@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8164.2" systemVersion="14F19a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="VHQ-jV-m7Y">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8164.2" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="VHQ-jV-m7Y">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8135.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Trip Table View Controller-->
@@ -13,13 +14,146 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TripCell" id="g6k-Oi-C6A">
-                                <rect key="frame" x="0.0" y="22" width="600" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TripCell" rowHeight="100" id="g6k-Oi-C6A" customClass="TripCell" customModule="Weather" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="22" width="600" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="g6k-Oi-C6A" id="NdC-De-ogN">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="99.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OGf-MP-Dyj">
+                                            <rect key="frame" x="8" y="8" width="461" height="20.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="Gbz-9d-1nL"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather report" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ml0-5q-6yi" userLabel="Weather Report Label">
+                                            <rect key="frame" x="8" y="29" width="461" height="14.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="461" id="GUZ-yt-WH8">
+                                                    <variation key="heightClass=compact-widthClass=compact" constant="250"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="250"/>
+                                                </constraint>
+                                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="62" id="MRn-uf-8mm"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="High:100" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Js-ZQ-QKG" userLabel="High Temp Label">
+                                            <rect key="frame" x="477" y="-5" width="56" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="2dx-mV-1Zt"/>
+                                                <constraint firstAttribute="width" constant="56" id="G4w-17-kA0"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Low:-10" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Sa-zn-Qe1" userLabel="Low Temp Label">
+                                            <rect key="frame" x="541" y="-5" width="49" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="OQL-dA-Vnh"/>
+                                                <constraint firstAttribute="width" constant="49" id="zMP-cy-iBE"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="nightbackground" translatesAutoresizingMaskIntoConstraints="NO" id="tVU-wh-rtC" userLabel="Night Back Image View">
+                                            <rect key="frame" x="537" y="16" width="55" height="47"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="47" id="5IS-pf-wRR">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="50"/>
+                                                </constraint>
+                                                <constraint firstAttribute="width" constant="55" id="9j1-qg-bSJ">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="50"/>
+                                                </constraint>
+                                            </constraints>
+                                        </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ltE-4I-3zh" userLabel="Night Image View">
+                                            <rect key="frame" x="537" y="16" width="55" height="47"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" id="3Ip-AP-het">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="45"/>
+                                                </constraint>
+                                                <constraint firstAttribute="height" constant="45" id="TYv-YA-eue"/>
+                                            </constraints>
+                                        </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HLe-Tw-eap" userLabel="Day Image View">
+                                            <rect key="frame" x="477" y="16" width="55" height="47"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="45" id="4UP-Wo-ujy"/>
+                                                <constraint firstAttribute="height" constant="45" id="JoB-HR-XOb"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.8642578125" green="0.96052631578947367" blue="0.85819284539473684" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstItem="OGf-MP-Dyj" firstAttribute="leading" secondItem="NdC-De-ogN" secondAttribute="leadingMargin" id="Ems-7v-22O"/>
+                                        <constraint firstAttribute="leadingMargin" secondItem="ml0-5q-6yi" secondAttribute="leading" id="FDL-Xu-O8N"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="tVU-wh-rtC" secondAttribute="trailing" id="Fsz-Hd-ayP"/>
+                                        <constraint firstItem="8Sa-zn-Qe1" firstAttribute="top" secondItem="OGf-MP-Dyj" secondAttribute="top" priority="900" id="IWj-6g-amK"/>
+                                        <constraint firstItem="ml0-5q-6yi" firstAttribute="width" secondItem="OGf-MP-Dyj" secondAttribute="width" id="JNz-WN-hxy"/>
+                                        <constraint firstItem="ltE-4I-3zh" firstAttribute="top" secondItem="OGf-MP-Dyj" secondAttribute="bottom" id="OEY-NU-b99">
+                                            <variation key="heightClass=regular-widthClass=compact" constant="3"/>
+                                        </constraint>
+                                        <constraint firstAttribute="trailingMargin" secondItem="ltE-4I-3zh" secondAttribute="trailing" id="Ttl-Y9-KeZ">
+                                            <variation key="heightClass=regular-widthClass=compact" constant="3"/>
+                                        </constraint>
+                                        <constraint firstItem="tVU-wh-rtC" firstAttribute="top" secondItem="OGf-MP-Dyj" secondAttribute="bottom" id="ZCe-Bd-Y82"/>
+                                        <constraint firstItem="OGf-MP-Dyj" firstAttribute="top" secondItem="NdC-De-ogN" secondAttribute="topMargin" id="gs9-m7-s28"/>
+                                        <constraint firstItem="HLe-Tw-eap" firstAttribute="top" secondItem="OGf-MP-Dyj" secondAttribute="bottom" id="l1L-nd-kfG">
+                                            <variation key="heightClass=regular-widthClass=compact" constant="3"/>
+                                        </constraint>
+                                        <constraint firstAttribute="trailingMargin" secondItem="8Sa-zn-Qe1" secondAttribute="trailing" constant="2" id="lMQ-Xn-a0o">
+                                            <variation key="heightClass=regular-widthClass=compact" constant="-2"/>
+                                        </constraint>
+                                        <constraint firstAttribute="trailingMargin" secondItem="7Js-ZQ-QKG" secondAttribute="trailing" constant="59" id="m4e-Qp-aMP">
+                                            <variation key="heightClass=regular-widthClass=compact" constant="50"/>
+                                        </constraint>
+                                        <constraint firstAttribute="trailingMargin" secondItem="HLe-Tw-eap" secondAttribute="trailing" constant="60" id="m6U-SN-8Zl">
+                                            <variation key="heightClass=regular-widthClass=compact" constant="63"/>
+                                        </constraint>
+                                        <constraint firstItem="ml0-5q-6yi" firstAttribute="top" secondItem="NdC-De-ogN" secondAttribute="topMargin" constant="21" id="sVE-S0-SRS"/>
+                                        <constraint firstItem="7Js-ZQ-QKG" firstAttribute="top" secondItem="OGf-MP-Dyj" secondAttribute="top" priority="900" id="tzn-05-ga8"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="HLe-Tw-eap" secondAttribute="trailing" constant="68" id="2sg-Ei-6nC"/>
+                                    <constraint firstItem="HLe-Tw-eap" firstAttribute="top" secondItem="g6k-Oi-C6A" secondAttribute="top" constant="20" id="6I0-T2-IYz"/>
+                                    <constraint firstItem="ml0-5q-6yi" firstAttribute="leading" secondItem="g6k-Oi-C6A" secondAttribute="leading" constant="8" id="HU6-Gb-bql"/>
+                                    <constraint firstItem="tVU-wh-rtC" firstAttribute="top" secondItem="g6k-Oi-C6A" secondAttribute="top" constant="20" id="IhZ-VL-l5A"/>
+                                    <constraint firstItem="HLe-Tw-eap" firstAttribute="top" secondItem="g6k-Oi-C6A" secondAttribute="top" constant="20" id="Myu-lO-HFt"/>
+                                    <constraint firstItem="ml0-5q-6yi" firstAttribute="top" secondItem="g6k-Oi-C6A" secondAttribute="top" constant="29" id="PhU-R1-qX0"/>
+                                    <constraint firstAttribute="trailing" secondItem="tVU-wh-rtC" secondAttribute="trailing" constant="8" id="h0e-Rf-F2b"/>
+                                    <constraint firstItem="ltE-4I-3zh" firstAttribute="top" secondItem="g6k-Oi-C6A" secondAttribute="top" constant="20" id="iqZ-iq-wid"/>
+                                    <constraint firstAttribute="trailing" secondItem="ltE-4I-3zh" secondAttribute="trailing" constant="8" id="r5S-ma-Jdr"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="HU6-Gb-bql"/>
+                                        <exclude reference="PhU-R1-qX0"/>
+                                        <exclude reference="2sg-Ei-6nC"/>
+                                        <exclude reference="6I0-T2-IYz"/>
+                                        <exclude reference="Myu-lO-HFt"/>
+                                        <exclude reference="iqZ-iq-wid"/>
+                                        <exclude reference="r5S-ma-Jdr"/>
+                                        <exclude reference="IhZ-VL-l5A"/>
+                                        <exclude reference="h0e-Rf-F2b"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <outlet property="cityNameLabel" destination="OGf-MP-Dyj" id="Uhf-g8-P2Z"/>
+                                    <outlet property="dayImageView" destination="HLe-Tw-eap" id="6G7-Ae-6n1"/>
+                                    <outlet property="highTempLabel" destination="7Js-ZQ-QKG" id="HXo-lD-yTP"/>
+                                    <outlet property="lowTempLabel" destination="8Sa-zn-Qe1" id="hCn-oQ-WXg"/>
+                                    <outlet property="nightImageView" destination="ltE-4I-3zh" id="DGi-Cu-Elc"/>
+                                    <outlet property="weatherReportLabel" destination="ml0-5q-6yi" id="mew-D0-lvV"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -33,4 +167,7 @@
             <point key="canvasLocation" x="553" y="395"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="nightbackground" width="50" height="50"/>
+    </resources>
 </document>

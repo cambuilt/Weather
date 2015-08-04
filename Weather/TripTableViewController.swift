@@ -9,6 +9,13 @@
 import UIKit
 import CoreData
 
+enum WeatherError : ErrorType
+{
+    case InvalidURL
+    case InvalidJSON
+    case MissingForecast
+}
+
 class TripTableViewController : UITableViewController
 {
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
@@ -44,6 +51,7 @@ class TripTableViewController : UITableViewController
             try Trip.addTrip("Kitty Hawk", state: "NC", startDate: "08/03/2015", endDate: "08/15/2015")
             try Trip.addTrip("Freeport", state: "BS", startDate: "08/03/2015", endDate: "08/15/2015")
             try Trip.addTrip("Barrow", state: "AK", startDate: "08/03/2015", endDate: "08/15/2015")
+            // try Trip.addTrip("Nuuk", state: "GL", startDate: "08/03/2015", endDate: "08/15/2015")
         } catch {
             print(error)
         }
@@ -62,12 +70,12 @@ class TripTableViewController : UITableViewController
                 do {
                     try getWeather(trip)
                 } catch {
-                    print(error)
+                    print("getWeather error: \(error)")
                 }
             }
             
         } catch {
-            print(error)
+            print("getTrips error: \(error)")
         }
     }
     
@@ -105,48 +113,17 @@ class TripTableViewController : UITableViewController
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "TripCell")
-        cell.backgroundColor = UIColor(red: 0.9, green: 1.0, blue: 0.9, alpha: 1.0)
-        cell.textLabel?.text = " "
-        cell.textLabel?.frame.size.height = 100
-        let cityLabel = UILabel(frame: CGRect(x: 0, y: -10, width: 200, height: 50))
-        cityLabel.font = UIFont.boldSystemFontOfSize(16)
-        cityLabel.text = "\(tripArray[indexPath.row].city!), \(tripArray[indexPath.row].state!)"
-        cell.textLabel?.addSubview(cityLabel)
+        let cell = tableView.dequeueReusableCellWithIdentifier("TripCell", forIndexPath: indexPath) as! TripCell
+        cell.cityNameLabel.text = "\(tripArray[indexPath.row].city!), \(tripArray[indexPath.row].state!)"
         
         if indexPath.row < weatherArray.count {
-            let dayImageView = UIImageView(image: UIImage(named: weatherArray[indexPath.row]["Day"]!))
-            dayImageView.frame = CGRect(x: 250, y: 20, width: 40, height: 40)
-            
-            let nightImageBackgroundView = UIImageView(image: UIImage(named: "nightbackground"))
-            nightImageBackgroundView.alpha = 0.3
-            nightImageBackgroundView.frame = CGRect(x: 307, y: 20, width: 40, height: 40)
-            
-            let nightImageView = UIImageView(image: UIImage(named: weatherArray[indexPath.row]["Night"]!))
-            nightImageView.frame = CGRect(x: 307, y: 20, width: 40, height: 40)
-            
-            let highTempLabel = UILabel(frame: CGRect(x: 250, y: -10, width: 60, height: 40))
-            highTempLabel.font = UIFont.systemFontOfSize(12)
+            cell.weatherReportLabel.text = weatherArray[indexPath.row]["Text"]!
+            cell.dayImageView.image = UIImage(named: weatherArray[indexPath.row]["Day"]!)
+            cell.nightImageView.image = UIImage(named: weatherArray[indexPath.row]["Night"]!)
             let high = weatherArray[indexPath.row]["High"]!
-            highTempLabel.text = "High:\(high)"
-            
-            let lowTempLabel = UILabel(frame: CGRect(x: 305, y: -10, width: 60, height: 40))
-            lowTempLabel.font = UIFont.systemFontOfSize(12)
+            cell.highTempLabel.text = "High:\(high) - "
             let low = weatherArray[indexPath.row]["Low"]!
-            lowTempLabel.text = "Low:\(low)"
-            
-            cell.textLabel?.addSubview(dayImageView)
-            cell.textLabel?.addSubview(nightImageBackgroundView)
-            cell.textLabel?.addSubview(nightImageView)
-            cell.textLabel?.addSubview(highTempLabel)
-            cell.textLabel?.addSubview(lowTempLabel)
-            
-            let reportLabel = UILabel(frame: CGRect(x: 0, y: 25, width: 200, height: 80))
-            reportLabel.font = UIFont.systemFontOfSize(12)
-            reportLabel.text = weatherArray[indexPath.row]["Text"]!
-            reportLabel.numberOfLines = 5
-            reportLabel.sizeToFit()
-            cell.textLabel?.addSubview(reportLabel)
+            cell.lowTempLabel.text = "Low:\(low)"
         }
         
         return cell
@@ -178,10 +155,10 @@ class TripTableViewController : UITableViewController
             let index = (toDays - fromDays) * 2
             
             guard let url = NSURL(string: urlString) else {
-                throw NSError(domain: "Weather", code: -1, userInfo: nil)
+                throw WeatherError.InvalidURL
             }
             
-            let dataTask = NSURLSession.init(configuration: NSURLSessionConfiguration.defaultSessionConfiguration()).dataTaskWithURL(url) { (data:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
+            let dataTask = NSURLSession(configuration:.defaultSessionConfiguration()).dataTaskWithURL(url) { (data:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
                 do {
                     if let jsonData = data {
                         let json = try NSJSONSerialization.JSONObjectWithData(jsonData, options: .MutableContainers) as? NSDictionary
@@ -192,8 +169,7 @@ class TripTableViewController : UITableViewController
                             let txt_forecast = forecast["txt_forecast"] as? NSDictionary,
                             let txt_forecastday = txt_forecast["forecastday"] as? NSArray
                         else {
-                            self.showError("10 day forecast is not available for \(trip.city!), \(trip.state!).")
-                            return
+                            throw WeatherError.MissingForecast
                         }
                         
                         if index < simpleforecastday.count {
@@ -209,14 +185,15 @@ class TripTableViewController : UITableViewController
                                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                                     self.tableView.reloadData()
                                 })
-                                
                              }
                         }
                     } else {
-                        // errorMessage = "json is nil"
+                        throw WeatherError.InvalidJSON
                     }
+//                } catch WeatherError.InvalidJSON {
+//                    print("Special actions for this error.")
                 } catch {
-                    print(error)
+                    self.showError(error)
                 }
             }
             
@@ -224,13 +201,24 @@ class TripTableViewController : UITableViewController
         }
     }
     
-    func showError(message:String)
+    func showError(error:ErrorType)
     {
         if alertShown == false {
-            print("make alert")
             alertShown = true
+            var message = ""
+            
+            switch error {
+                case WeatherError.InvalidJSON:
+                    message = "The URL returned invalid JSON."
+
+                case WeatherError.MissingForecast:
+                    message = "There is no 10 day forecast for some of your cities."
+                
+                default:break
+            }
+            
             alert = UIAlertController(title: "Weather Message", message: message, preferredStyle: UIAlertControllerStyle.ActionSheet)
-            let delay = 4.0 * Double(NSEC_PER_SEC)
+            let delay = 5.0 * Double(NSEC_PER_SEC)
             let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
 
             dispatch_after(time, dispatch_get_main_queue()) { () -> Void in
@@ -243,7 +231,6 @@ class TripTableViewController : UITableViewController
     
     func dismissAlert()
     {
-        print("dismissing")
         alertShown = false
         dismissViewControllerAnimated(true, completion: nil)
     }

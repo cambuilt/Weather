@@ -17,6 +17,7 @@
 		18CEB08C1B6A749500190016 /* TripTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CEB08B1B6A749400190016 /* TripTableViewController.swift */; };
 		18CEB0921B6A7E8200190016 /* Trip+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CEB0901B6A7E8200190016 /* Trip+CoreDataProperties.swift */; };
 		18CEB0931B6A7E8200190016 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CEB0911B6A7E8200190016 /* Trip.swift */; };
+		18FE9C9D1B71170A005D4888 /* TripCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FE9C9C1B71170A005D4888 /* TripCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		18CEB08B1B6A749400190016 /* TripTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TripTableViewController.swift; path = Weather/TripTableViewController.swift; sourceTree = "<group>"; };
 		18CEB0901B6A7E8200190016 /* Trip+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Trip+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		18CEB0911B6A7E8200190016 /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
+		18FE9C9C1B71170A005D4888 /* TripCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 		18CEB04E1B6A740F00190016 = {
 			isa = PBXGroup;
 			children = (
+				18FE9C9C1B71170A005D4888 /* TripCell.swift */,
 				18CEB05A1B6A740F00190016 /* AppDelegate.swift */,
 				18CEB05E1B6A740F00190016 /* Main.storyboard */,
 				18CEB0641B6A740F00190016 /* Assets.xcassets */,
@@ -261,6 +264,7 @@
 				18CEB08C1B6A749500190016 /* TripTableViewController.swift in Sources */,
 				18CEB0631B6A740F00190016 /* Weather.xcdatamodeld in Sources */,
 				18CEB0921B6A7E8200190016 /* Trip+CoreDataProperties.swift in Sources */,
+				18FE9C9D1B71170A005D4888 /* TripCell.swift in Sources */,
 				18CEB05B1B6A740F00190016 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
