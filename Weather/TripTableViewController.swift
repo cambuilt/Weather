@@ -14,6 +14,7 @@ enum WeatherError : ErrorType
     case InvalidURL
     case InvalidJSON
     case MissingForecast
+    case WeatherSiteUnreachable
 }
 
 class TripTableViewController : UITableViewController
@@ -24,24 +25,26 @@ class TripTableViewController : UITableViewController
     var tripCount = 0
     var weatherArray = [[String:String]]()
     var weatherCounter = 0
-    let loadMode = false
+    let loadMode = true
     var alert:UIAlertController!
     var chosenDate:NSDate!
     var alertShown = false
+    let apiKey = "10851ae3ab8887d6"
     
     override func viewDidLoad()
     {
-        super.viewDidLoad()
         chosenDate = NSDate().dateByAddingTimeInterval(secondsInADay * 3)
+    }
+    
+    override func viewDidAppear(animated: Bool)
+    {
+        super.viewDidAppear(animated)
         
         if loadMode == true {
             loadTrips()
         }
-
+        
         getTrips()
-
-        tableView.sectionHeaderHeight = 64
-        tableView.rowHeight = 90
     }
 
     func loadTrips()
@@ -64,15 +67,17 @@ class TripTableViewController : UITableViewController
         do {
             let trips = try managedObjectContext.executeFetchRequest(request) as! [Trip]
             tripCount = trips.count
-            weatherCounter = 0
             
             for trip in trips {
                 do {
+                    self.tripArray.append(trip)
                     try getWeather(trip)
                 } catch {
                     print("getWeather error: \(error)")
                 }
             }
+            
+            tableView.reloadData()
             
         } catch {
             print("getTrips error: \(error)")
@@ -111,6 +116,11 @@ class TripTableViewController : UITableViewController
         return tripArray.count
     }
     
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    {
+        return 100
+    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("TripCell", forIndexPath: indexPath) as! TripCell
@@ -124,6 +134,11 @@ class TripTableViewController : UITableViewController
             cell.highTempLabel.text = "High:\(high) - "
             let low = weatherArray[indexPath.row]["Low"]!
             cell.lowTempLabel.text = "Low:\(low)"
+        } else {
+            cell.weatherReportLabel.text = ""
+            cell.highTempLabel.text = ""
+            cell.lowTempLabel.text = ""
+            cell.nightBackImageView.hidden = true
         }
         
         return cell
@@ -142,7 +157,6 @@ class TripTableViewController : UITableViewController
     
     func getWeather(trip:Trip) throws
     {
-        let apiKey = "10851ae3ab8887d6"
         let urlCity = trip.city!.stringByReplacingOccurrencesOfString(" ", withString: "_")
         let urlString = "http://api.wunderground.com/api/\(apiKey)/forecast10day/q/\(trip.state!)/\(urlCity).json"
 //        let urlString = "http://www.microsoft.com"
@@ -179,7 +193,7 @@ class TripTableViewController : UITableViewController
                             let lowTemp = ((simpleforecastday[index] as! NSDictionary)["low"] as! NSDictionary)["fahrenheit"] as! String
                             let fcttext = (txt_forecastday[index * 2] as! NSDictionary)["fcttext"] as! String
                             self.weatherArray.append(["Day":dayIcon,"Night":nightIcon,"High":highTemp,"Low":lowTemp,"Text":fcttext])
-                            self.tripArray.append(trip)
+                            
                             
                              if self.tripArray.count == self.tripCount {
                                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -188,7 +202,7 @@ class TripTableViewController : UITableViewController
                              }
                         }
                     } else {
-                        throw WeatherError.InvalidJSON
+                        throw error!
                     }
 //                } catch WeatherError.InvalidJSON {
 //                    print("Special actions for this error.")
@@ -210,11 +224,12 @@ class TripTableViewController : UITableViewController
             switch error {
                 case WeatherError.InvalidJSON:
                     message = "The URL returned invalid JSON."
-
                 case WeatherError.MissingForecast:
                     message = "There is no 10 day forecast for some of your cities."
-                
-                default:break
+                case WeatherError.WeatherSiteUnreachable:
+                    message = "Weather information is unavailable."
+                default:
+                    message = (error as NSError).localizedDescription
             }
             
             alert = UIAlertController(title: "Weather Message", message: message, preferredStyle: UIAlertControllerStyle.ActionSheet)
@@ -234,5 +249,4 @@ class TripTableViewController : UITableViewController
         alertShown = false
         dismissViewControllerAnimated(true, completion: nil)
     }
-
 }

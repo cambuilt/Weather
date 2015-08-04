@@ -16,5 +16,5 @@ class TripCell : UITableViewCell
     @IBOutlet weak var lowTempLabel: UILabel!
     @IBOutlet weak var dayImageView: UIImageView!
     @IBOutlet weak var nightImageView: UIImageView!
-    
+    @IBOutlet weak var nightBackImageView: UIImageView!
 }

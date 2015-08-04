@@ -9,13 +9,13 @@
         <scene sceneID="FFc-uF-3Zx">
             <objects>
                 <tableViewController id="VHQ-jV-m7Y" customClass="TripTableViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="BZD-4u-Qms">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="64" sectionFooterHeight="22" id="BZD-4u-Qms">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TripCell" rowHeight="100" id="g6k-Oi-C6A" customClass="TripCell" customModule="Weather" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="22" width="600" height="100"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="g6k-Oi-C6A" id="NdC-De-ogN">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="99.5"/>
@@ -151,6 +151,7 @@
                                     <outlet property="dayImageView" destination="HLe-Tw-eap" id="6G7-Ae-6n1"/>
                                     <outlet property="highTempLabel" destination="7Js-ZQ-QKG" id="HXo-lD-yTP"/>
                                     <outlet property="lowTempLabel" destination="8Sa-zn-Qe1" id="hCn-oQ-WXg"/>
+                                    <outlet property="nightBackImageView" destination="tVU-wh-rtC" id="dPK-Ad-0GQ"/>
                                     <outlet property="nightImageView" destination="ltE-4I-3zh" id="DGi-Cu-Elc"/>
                                     <outlet property="weatherReportLabel" destination="ml0-5q-6yi" id="mew-D0-lvV"/>
                                 </connections>
