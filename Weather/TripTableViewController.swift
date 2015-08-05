@@ -25,7 +25,7 @@ class TripTableViewController : UITableViewController
     var tripCount = 0
     var weatherArray = [[String:String]]()
     var weatherCounter = 0
-    let loadMode = true
+    var loadMode = false
     var alert:UIAlertController!
     var chosenDate:NSDate!
     var alertShown = false
@@ -34,17 +34,12 @@ class TripTableViewController : UITableViewController
     override func viewDidLoad()
     {
         chosenDate = NSDate().dateByAddingTimeInterval(secondsInADay * 3)
-    }
-    
-    override func viewDidAppear(animated: Bool)
-    {
-        super.viewDidAppear(animated)
         
         if loadMode == true {
             loadTrips()
+        } else {
+            getTrips()
         }
-        
-        getTrips()
     }
 
     func loadTrips()
@@ -86,22 +81,16 @@ class TripTableViewController : UITableViewController
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let sectionHeaderView = UIView(frame: CGRect(x: 0, y: 3, width: 320, height: 30))
-        sectionHeaderView.backgroundColor = UIColor(red: 0.2, green: 0.5, blue: 0.2, alpha: 1.0)
-        let headerLabel = UILabel(frame: CGRect(x: 16, y: 24, width: 220, height: 32))
+        sectionHeaderView.backgroundColor = UIColor(red: 0.4, green: 0.7, blue: 0.4, alpha: 1.0)
+        let headerLabel = UILabel(frame: CGRect(x: 12, y: 5, width: 220, height: 32))
         headerLabel.textColor = UIColor.whiteColor()
-        headerLabel.text = "Trips"
-        headerLabel.font = UIFont.boldSystemFontOfSize(20.0)
-        sectionHeaderView.addSubview(headerLabel)
-        
         let dateFormat = NSDateFormatter()
         dateFormat.dateFormat = "EEEE, MMMM d"
         dateFormat.timeZone = NSTimeZone.localTimeZone()
         let stringDate = dateFormat.stringFromDate(chosenDate)
-        let dateLabel = UILabel(frame: CGRect(x: 240, y: 24, width: 220, height: 32))
-        dateLabel.textColor = UIColor.whiteColor()
-        dateLabel.text = stringDate
-        dateLabel.font = UIFont.boldSystemFontOfSize(12.0)
-        sectionHeaderView.addSubview(dateLabel)
+        headerLabel.text = stringDate
+        headerLabel.font = UIFont.boldSystemFontOfSize(18.0)
+        sectionHeaderView.addSubview(headerLabel)
         
         return sectionHeaderView
     }
@@ -124,7 +113,7 @@ class TripTableViewController : UITableViewController
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("TripCell", forIndexPath: indexPath) as! TripCell
-        cell.cityNameLabel.text = "\(tripArray[indexPath.row].city!), \(tripArray[indexPath.row].state!)"
+        cell.cityNameLabel.text = "\(tripArray[indexPath.row].city), \(tripArray[indexPath.row].state)"
         
         if indexPath.row < weatherArray.count {
             cell.weatherReportLabel.text = weatherArray[indexPath.row]["Text"]!
@@ -146,7 +135,20 @@ class TripTableViewController : UITableViewController
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        
+        performSegueWithIdentifier("MapSegue", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        if segue.identifier == "MapSegue" {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let locationName = "\(tripArray[indexPath.row].city), \(tripArray[indexPath.row].state)"
+                if let mapViewController = segue.destinationViewController as? MapViewController {
+                    mapViewController.navigationItem.title = locationName
+                    mapViewController.centerMapOnCity(locationName)
+                }
+            }
+        }
     }
     
     override func didReceiveMemoryWarning()
@@ -157,8 +159,8 @@ class TripTableViewController : UITableViewController
     
     func getWeather(trip:Trip) throws
     {
-        let urlCity = trip.city!.stringByReplacingOccurrencesOfString(" ", withString: "_")
-        let urlString = "http://api.wunderground.com/api/\(apiKey)/forecast10day/q/\(trip.state!)/\(urlCity).json"
+        let urlCity = trip.city.stringByReplacingOccurrencesOfString(" ", withString: "_")
+        let urlString = "http://api.wunderground.com/api/\(apiKey)/forecast10day/q/\(trip.state)/\(urlCity).json"
 //        let urlString = "http://www.microsoft.com"
         let startDate = NSDate()
         let endDate = NSDate().dateByAddingTimeInterval(secondsInADay * 7)
@@ -194,12 +196,11 @@ class TripTableViewController : UITableViewController
                             let fcttext = (txt_forecastday[index * 2] as! NSDictionary)["fcttext"] as! String
                             self.weatherArray.append(["Day":dayIcon,"Night":nightIcon,"High":highTemp,"Low":lowTemp,"Text":fcttext])
                             
-                            
-                             if self.tripArray.count == self.tripCount {
-                                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                                    self.tableView.reloadData()
-                                })
-                             }
+                            if self.tripArray.count == self.tripCount {
+                               dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                   self.tableView.reloadData()
+                               })
+                            }
                         }
                     } else {
                         throw error!

@@ -11,6 +11,8 @@
 		189C61C91B724C40008A6431 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189C61C81B724C40008A6431 /* Trip.swift */; };
 		189C61CB1B724C4A008A6431 /* Trip+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189C61CA1B724C4A008A6431 /* Trip+CoreDataProperties.swift */; };
 		189C61CD1B724C56008A6431 /* TripCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189C61CC1B724C56008A6431 /* TripCell.swift */; };
+		189C61CF1B724D71008A6431 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 189C61CE1B724D71008A6431 /* MapKit.framework */; };
+		189C61D31B726AA6008A6431 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 189C61D21B726AA6008A6431 /* SafariServices.framework */; };
 		18CEB05B1B6A740F00190016 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CEB05A1B6A740F00190016 /* AppDelegate.swift */; };
 		18CEB0601B6A740F00190016 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18CEB05E1B6A740F00190016 /* Main.storyboard */; };
 		18CEB0631B6A740F00190016 /* Weather.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18CEB0611B6A740F00190016 /* Weather.xcdatamodeld */; };
@@ -43,6 +45,8 @@
 		189C61C81B724C40008A6431 /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Trip.swift; path = Weather/Trip.swift; sourceTree = "<group>"; };
 		189C61CA1B724C4A008A6431 /* Trip+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Trip+CoreDataProperties.swift"; path = "Weather/Trip+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		189C61CC1B724C56008A6431 /* TripCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TripCell.swift; path = Weather/TripCell.swift; sourceTree = "<group>"; };
+		189C61CE1B724D71008A6431 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		189C61D21B726AA6008A6431 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		18CEB0571B6A740F00190016 /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18CEB05A1B6A740F00190016 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Weather/AppDelegate.swift; sourceTree = "<group>"; };
 		18CEB05F1B6A740F00190016 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -64,6 +68,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				189C61D31B726AA6008A6431 /* SafariServices.framework in Frameworks */,
+				189C61CF1B724D71008A6431 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,17 +93,19 @@
 		18CEB04E1B6A740F00190016 = {
 			isa = PBXGroup;
 			children = (
-				189C61C61B724BF6008A6431 /* MapViewController.swift */,
-				189C61CC1B724C56008A6431 /* TripCell.swift */,
+				189C61D21B726AA6008A6431 /* SafariServices.framework */,
 				18CEB05A1B6A740F00190016 /* AppDelegate.swift */,
 				18CEB05E1B6A740F00190016 /* Main.storyboard */,
+				18CEB0611B6A740F00190016 /* Weather.xcdatamodeld */,
+				189C61C81B724C40008A6431 /* Trip.swift */,
+				189C61CA1B724C4A008A6431 /* Trip+CoreDataProperties.swift */,
+				18CEB08B1B6A749400190016 /* TripTableViewController.swift */,
+				189C61C61B724BF6008A6431 /* MapViewController.swift */,
+				189C61CC1B724C56008A6431 /* TripCell.swift */,
 				18CEB0641B6A740F00190016 /* Assets.xcassets */,
 				18CEB0661B6A740F00190016 /* LaunchScreen.storyboard */,
 				18CEB0691B6A740F00190016 /* Info.plist */,
-				18CEB0611B6A740F00190016 /* Weather.xcdatamodeld */,
-				18CEB08B1B6A749400190016 /* TripTableViewController.swift */,
-				189C61CA1B724C4A008A6431 /* Trip+CoreDataProperties.swift */,
-				189C61C81B724C40008A6431 /* Trip.swift */,
+				189C61CE1B724D71008A6431 /* MapKit.framework */,
 				18CEB0711B6A740F00190016 /* WeatherTests */,
 				18CEB07C1B6A740F00190016 /* WeatherUITests */,
 				18CEB0581B6A740F00190016 /* Products */,
