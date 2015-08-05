@@ -24,7 +24,6 @@ class TripTableViewController : UITableViewController
     var tripArray = [Trip]()
     var tripCount = 0
     var weatherArray = [[String:String]]()
-    var weatherCounter = 0
     var loadMode = false
     var alert:UIAlertController!
     var chosenDate:NSDate!
@@ -45,11 +44,11 @@ class TripTableViewController : UITableViewController
     func loadTrips()
     {
         do {
-            try Trip.addTrip("New York", state: "NY", startDate: "08/03/2015", endDate: "08/15/2015")
-            try Trip.addTrip("Kitty Hawk", state: "NC", startDate: "08/03/2015", endDate: "08/15/2015")
-            try Trip.addTrip("Freeport", state: "BS", startDate: "08/03/2015", endDate: "08/15/2015")
-            try Trip.addTrip("Barrow", state: "AK", startDate: "08/03/2015", endDate: "08/15/2015")
-            // try Trip.addTrip("Nuuk", state: "GL", startDate: "08/03/2015", endDate: "08/15/2015")
+            try Trip.addTrip("New York", state: "NY", countryCode: "US", startDate: "08/03/2015", endDate: "08/15/2015")
+            try Trip.addTrip("Kitty Hawk", state: "NC", countryCode: "US", startDate: "08/03/2015", endDate: "08/15/2015")
+            try Trip.addTrip("Freeport", state: "", countryCode: "BS", startDate: "08/03/2015", endDate: "08/15/2015")
+            try Trip.addTrip("Barrow", state: "AK", countryCode: "US", startDate: "08/03/2015", endDate: "08/15/2015")
+            // try Trip.addTrip("Nuuk", state: "", countryCode: "GL", startDate: "08/03/2015", endDate: "08/15/2015")
         } catch {
             print(error)
         }
@@ -160,7 +159,14 @@ class TripTableViewController : UITableViewController
     func getWeather(trip:Trip) throws
     {
         let urlCity = trip.city.stringByReplacingOccurrencesOfString(" ", withString: "_")
-        let urlString = "http://api.wunderground.com/api/\(apiKey)/forecast10day/q/\(trip.state)/\(urlCity).json"
+        var urlString = ""
+        
+        if trip.state.characters.count > 0 {
+            urlString = "http://api.wunderground.com/api/\(apiKey)/forecast10day/q/\(trip.state)/\(urlCity).json"
+        } else {
+            urlString = "http://api.wunderground.com/api/\(apiKey)/forecast10day/q/\(trip.countryCode)/\(urlCity).json"
+        }
+        
 //        let urlString = "http://www.microsoft.com"
         let startDate = NSDate()
         let endDate = NSDate().dateByAddingTimeInterval(secondsInADay * 7)
