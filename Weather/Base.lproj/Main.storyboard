@@ -167,6 +167,23 @@
             </objects>
             <point key="canvasLocation" x="553" y="395"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="tBr-Db-kMO">
+            <objects>
+                <viewController id="HtF-we-489" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7za-aR-8ye"/>
+                        <viewControllerLayoutGuide type="bottom" id="SKg-CB-4zM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Kq7-fO-th0">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a0X-2W-06I" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1296" y="389.25"/>
+        </scene>
     </scenes>
     <resources>
         <image name="nightbackground" width="50" height="50"/>
