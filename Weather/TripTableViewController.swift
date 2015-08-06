@@ -65,7 +65,7 @@ class TripTableViewController : UITableViewController
             for trip in trips {
                 do {
                     self.tripArray.append(trip)
-                    try getWeather(trip)
+                    try getWeatherHC(trip)
                 } catch {
                     print("getWeather error: \(error)")
                 }
@@ -78,7 +78,8 @@ class TripTableViewController : UITableViewController
         }
     }
     
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
+    {
         let sectionHeaderView = UIView(frame: CGRect(x: 0, y: 3, width: 320, height: 30))
         sectionHeaderView.backgroundColor = UIColor(red: 0.4, green: 0.7, blue: 0.4, alpha: 1.0)
         let headerLabel = UILabel(frame: CGRect(x: 12, y: 5, width: 220, height: 32))
@@ -113,6 +114,7 @@ class TripTableViewController : UITableViewController
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("TripCell", forIndexPath: indexPath) as! TripCell
         cell.cityNameLabel.text = "\(tripArray[indexPath.row].city), \(tripArray[indexPath.row].state)"
+        print(UIImage(named: weatherArray[indexPath.row]["Night"]!))
         
         if indexPath.row < weatherArray.count {
             cell.weatherReportLabel.text = weatherArray[indexPath.row]["Text"]!
@@ -154,6 +156,16 @@ class TripTableViewController : UITableViewController
     {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func getWeatherHC(trip:Trip) throws
+    {
+        let dateFormat = NSDateFormatter()
+        dateFormat.dateFormat = "MM/dd/YY"
+        dateFormat.timeZone = NSTimeZone.localTimeZone()
+        let stringDate = dateFormat.stringFromDate(chosenDate)
+        
+        weatherArray.append(["Day":"clear","Night":"nt_cloudy","High":"76","Low":"64","Text":"Weather report for \(stringDate) will be sunny all day and then when night falls, clouds will roll in and sometimes block the moon. This will anger the moon who will push them away!"])
     }
     
     func getWeather(trip:Trip) throws
