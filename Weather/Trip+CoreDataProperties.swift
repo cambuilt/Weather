@@ -15,8 +15,10 @@ import CoreData
 extension Trip
 {
     @NSManaged var city: String
-    @NSManaged var countryCode: String
+    @NSManaged var country: String
     @NSManaged var state: String
     @NSManaged var startDate: NSDate?
     @NSManaged var endDate: NSDate?
+    @NSManaged var latitude: NSNumber?
+    @NSManaged var longitude: NSNumber?
 }

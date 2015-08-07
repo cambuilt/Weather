@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8164.2" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Vpr-F5-QLC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8173.3" systemVersion="14F25a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Vpr-F5-QLC">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8135.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8142"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -59,17 +59,6 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="nightbackground" translatesAutoresizingMaskIntoConstraints="NO" id="tVU-wh-rtC" userLabel="Night Back Image View">
-                                            <rect key="frame" x="537" y="16" width="55" height="47"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="47" id="5IS-pf-wRR">
-                                                    <variation key="heightClass=regular-widthClass=compact" constant="50"/>
-                                                </constraint>
-                                                <constraint firstAttribute="width" constant="55" id="9j1-qg-bSJ">
-                                                    <variation key="heightClass=regular-widthClass=compact" constant="50"/>
-                                                </constraint>
-                                            </constraints>
-                                        </imageView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ltE-4I-3zh" userLabel="Night Image View">
                                             <rect key="frame" x="537" y="16" width="55" height="47"/>
                                             <constraints>
@@ -95,7 +84,6 @@
                                         <constraint firstItem="ml0-5q-6yi" firstAttribute="width" secondItem="NdC-De-ogN" secondAttribute="width" constant="-130" id="Bhj-Gz-SlJ"/>
                                         <constraint firstItem="OGf-MP-Dyj" firstAttribute="leading" secondItem="NdC-De-ogN" secondAttribute="leadingMargin" id="Ems-7v-22O"/>
                                         <constraint firstAttribute="leadingMargin" secondItem="ml0-5q-6yi" secondAttribute="leading" id="FDL-Xu-O8N"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="tVU-wh-rtC" secondAttribute="trailing" id="Fsz-Hd-ayP"/>
                                         <constraint firstItem="OGf-MP-Dyj" firstAttribute="width" secondItem="NdC-De-ogN" secondAttribute="width" id="H01-w9-rM0"/>
                                         <constraint firstItem="8Sa-zn-Qe1" firstAttribute="top" secondItem="OGf-MP-Dyj" secondAttribute="top" priority="900" id="IWj-6g-amK"/>
                                         <constraint firstItem="ml0-5q-6yi" firstAttribute="width" secondItem="OGf-MP-Dyj" secondAttribute="width" constant="-130" id="JNz-WN-hxy"/>
@@ -107,7 +95,6 @@
                                             <variation key="widthClass=compact" constant="3"/>
                                             <variation key="heightClass=regular-widthClass=compact" constant="3"/>
                                         </constraint>
-                                        <constraint firstItem="tVU-wh-rtC" firstAttribute="top" secondItem="OGf-MP-Dyj" secondAttribute="bottom" id="ZCe-Bd-Y82"/>
                                         <constraint firstItem="OGf-MP-Dyj" firstAttribute="top" secondItem="NdC-De-ogN" secondAttribute="topMargin" id="gs9-m7-s28"/>
                                         <constraint firstItem="HLe-Tw-eap" firstAttribute="top" secondItem="OGf-MP-Dyj" secondAttribute="bottom" id="l1L-nd-kfG">
                                             <variation key="heightClass=regular-widthClass=compact" constant="3"/>
@@ -142,7 +129,6 @@
                                     <outlet property="dayImageView" destination="HLe-Tw-eap" id="6G7-Ae-6n1"/>
                                     <outlet property="highTempLabel" destination="7Js-ZQ-QKG" id="HXo-lD-yTP"/>
                                     <outlet property="lowTempLabel" destination="8Sa-zn-Qe1" id="hCn-oQ-WXg"/>
-                                    <outlet property="nightBackImageView" destination="tVU-wh-rtC" id="dPK-Ad-0GQ"/>
                                     <outlet property="nightImageView" destination="ltE-4I-3zh" id="DGi-Cu-Elc"/>
                                     <outlet property="weatherReportLabel" destination="ml0-5q-6yi" id="mew-D0-lvV"/>
                                 </connections>
@@ -251,7 +237,4 @@
             <point key="canvasLocation" x="552" y="394.5"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="nightbackground" width="50" height="50"/>
-    </resources>
 </document>

@@ -12,7 +12,7 @@ import CoreData
 @objc(Trip)
 class Trip: NSManagedObject
 {
-    class func addTrip(city:String, state:String, countryCode:String, startDate:String, endDate:String) throws -> Trip
+    class func addTrip(city:String, state:String, country:String, startDate:String, endDate:String, latitude:Double, longitude:Double) throws -> Trip
     {
         let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         let trip = NSEntityDescription.insertNewObjectForEntityForName("Trip", inManagedObjectContext: managedObjectContext) as! Trip
@@ -20,9 +20,11 @@ class Trip: NSManagedObject
         dateFormat.dateFormat = "MM/dd/YYYY"
         trip.city = city
         trip.state = state
-        trip.countryCode = countryCode
+        trip.country = country
         trip.startDate = dateFormat.dateFromString(startDate)
         trip.endDate = dateFormat.dateFromString(endDate)
+        trip.latitude = latitude
+        trip.longitude = longitude
         
         do {
             try managedObjectContext.save()

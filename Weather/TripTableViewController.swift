@@ -20,7 +20,6 @@ enum WeatherError : ErrorType
 class TripTableViewController : UITableViewController
 {
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-    let secondsInADay = 86400.0
     var tripArray = [Trip]()
     var tripCount = 0
     var weatherArray = [[String:String]]()
@@ -28,11 +27,11 @@ class TripTableViewController : UITableViewController
     var alert:UIAlertController!
     var chosenDate:NSDate!
     var alertShown = false
-    let apiKey = "10851ae3ab8887d6"
+    let apiKey = "68be623fd62b72cc6068bec1815deae4"
     
     override func viewDidLoad()
     {
-        chosenDate = NSDate().dateByAddingTimeInterval(secondsInADay * 3)
+        chosenDate = NSDate()
         
         if loadMode == true {
             loadTrips()
@@ -44,11 +43,13 @@ class TripTableViewController : UITableViewController
     func loadTrips()
     {
         do {
-            try Trip.addTrip("New York", state: "NY", countryCode: "US", startDate: "08/03/2015", endDate: "08/15/2015")
-            try Trip.addTrip("Kitty Hawk", state: "NC", countryCode: "US", startDate: "08/03/2015", endDate: "08/15/2015")
-            try Trip.addTrip("Freeport", state: "", countryCode: "BS", startDate: "08/03/2015", endDate: "08/15/2015")
-            try Trip.addTrip("Barrow", state: "AK", countryCode: "US", startDate: "08/03/2015", endDate: "08/15/2015")
-            // try Trip.addTrip("Nuuk", state: "", countryCode: "GL", startDate: "08/03/2015", endDate: "08/15/2015")
+            try Trip.addTrip("New York", state: "NY", country: "US", startDate: "08/03/2015", endDate: "08/15/2015", latitude: 40.713054, longitude: -74.007228)
+            try Trip.addTrip("Kitty Hawk", state: "NC", country: "US", startDate: "08/03/2015", endDate: "08/15/2015", latitude: 36.066357, longitude: -75.693523)
+            try Trip.addTrip("Freeport", state: "", country: "The Bahamas", startDate: "08/03/2015", endDate: "08/15/2015", latitude: 26.548167, longitude: -78.696324)
+            try Trip.addTrip("Barrow", state: "AK", country: "US", startDate: "08/03/2015", endDate: "08/15/2015", latitude: 71.298000, longitude: -156.766389)
+            try Trip.addTrip("Nuuk", state: "", country: "Greenland", startDate: "08/03/2015", endDate: "08/15/2015", latitude: 64.183877, longitude: -51.707876)
+            try Trip.addTrip("Hong Kong", state: "", country: "China", startDate: "08/03/2015", endDate: "08/15/2015", latitude: 22.358535, longitude: 114.142271)
+            try Trip.addTrip("Moscow", state: "", country: "Russia", startDate: "08/03/2015", endDate: "08/15/2015", latitude: 55.752222, longitude: 37.615556)
         } catch {
             print(error)
         }
@@ -65,7 +66,7 @@ class TripTableViewController : UITableViewController
             for trip in trips {
                 do {
                     self.tripArray.append(trip)
-                    try getWeatherHC(trip)
+                    try getWeather(trip)
                 } catch {
                     print("getWeather error: \(error)")
                 }
@@ -114,21 +115,19 @@ class TripTableViewController : UITableViewController
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("TripCell", forIndexPath: indexPath) as! TripCell
         cell.cityNameLabel.text = "\(tripArray[indexPath.row].city), \(tripArray[indexPath.row].state)"
-        print(UIImage(named: weatherArray[indexPath.row]["Night"]!))
         
         if indexPath.row < weatherArray.count {
             cell.weatherReportLabel.text = weatherArray[indexPath.row]["Text"]!
             cell.dayImageView.image = UIImage(named: weatherArray[indexPath.row]["Day"]!)
             cell.nightImageView.image = UIImage(named: weatherArray[indexPath.row]["Night"]!)
-            let high = weatherArray[indexPath.row]["High"]!
+            let high = weatherArray[indexPath.row]["High"]!.componentsSeparatedByCharactersInSet(NSCharacterSet.punctuationCharacterSet())[0]
             cell.highTempLabel.text = "High:\(high) - "
-            let low = weatherArray[indexPath.row]["Low"]!
+            let low = weatherArray[indexPath.row]["Low"]!.componentsSeparatedByCharactersInSet(NSCharacterSet.punctuationCharacterSet())[0]
             cell.lowTempLabel.text = "Low:\(low)"
         } else {
             cell.weatherReportLabel.text = ""
             cell.highTempLabel.text = ""
             cell.lowTempLabel.text = ""
-            cell.nightBackImageView.hidden = true
         }
         
         return cell
@@ -170,68 +169,60 @@ class TripTableViewController : UITableViewController
     
     func getWeather(trip:Trip) throws
     {
-        let urlCity = trip.city.stringByReplacingOccurrencesOfString(" ", withString: "_")
         var urlString = ""
-        
-        if trip.state.characters.count > 0 {
-            urlString = "http://api.wunderground.com/api/\(apiKey)/forecast10day/q/\(trip.state)/\(urlCity).json"
-        } else {
-            urlString = "http://api.wunderground.com/api/\(apiKey)/forecast10day/q/\(trip.countryCode)/\(urlCity).json"
+        urlString = "http://api.openweathermap.org/data/2.5/forecast/daily?lat=\(trip.latitude!.stringValue)&lon=\(trip.longitude!.stringValue)&cnt=16&units=imperial&APPID=\(apiKey)"
+//      urlString = "http://www.microsoft.com"
+
+        guard let url = NSURL(string: urlString) else {
+            throw WeatherError.InvalidURL
         }
         
-//        let urlString = "http://www.microsoft.com"
-        let startDate = NSDate()
-        let endDate = NSDate().dateByAddingTimeInterval(secondsInADay * 7)
-
-        if chosenDate == chosenDate.laterDate(startDate) && chosenDate != endDate.laterDate(chosenDate) {
-            let fromDays = NSCalendar.currentCalendar().ordinalityOfUnit(.Day, inUnit:.Era, forDate: startDate)
-            let toDays = NSCalendar.currentCalendar().ordinalityOfUnit(.Day, inUnit:.Era, forDate: chosenDate)
-            let index = (toDays - fromDays) * 2
-            
-            guard let url = NSURL(string: urlString) else {
-                throw WeatherError.InvalidURL
-            }
-            
-            let dataTask = NSURLSession(configuration:.defaultSessionConfiguration()).dataTaskWithURL(url) { (data:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
-                do {
-                    if let jsonData = data {
-                        let json = try NSJSONSerialization.JSONObjectWithData(jsonData, options: .MutableContainers) as? NSDictionary
-                        
-                        guard let forecast = json!["forecast"] as? NSDictionary,
-                            let simpleforecast = forecast["simpleforecast"] as? NSDictionary,
-                            let simpleforecastday = simpleforecast["forecastday"] as? NSArray,
-                            let txt_forecast = forecast["txt_forecast"] as? NSDictionary,
-                            let txt_forecastday = txt_forecast["forecastday"] as? NSArray
-                        else {
-                            throw WeatherError.MissingForecast
-                        }
-                        
-                        if index < simpleforecastday.count {
-                            let dayIcon = (txt_forecastday[index * 2] as! NSDictionary)["icon"] as! String
-                            let nightIcon = (txt_forecastday[index * 2 + 1] as! NSDictionary)["icon"] as! String
-                            let highTemp = ((simpleforecastday[index] as! NSDictionary)["high"] as! NSDictionary)["fahrenheit"] as! String
-                            let lowTemp = ((simpleforecastday[index] as! NSDictionary)["low"] as! NSDictionary)["fahrenheit"] as! String
-                            let fcttext = (txt_forecastday[index * 2] as! NSDictionary)["fcttext"] as! String
-                            self.weatherArray.append(["Day":dayIcon,"Night":nightIcon,"High":highTemp,"Low":lowTemp,"Text":fcttext])
-                            
-                            if self.tripArray.count == self.tripCount {
-                               dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                                   self.tableView.reloadData()
-                               })
-                            }
-                        }
-                    } else {
-                        throw error!
+        let dataTask = NSURLSession(configuration:.defaultSessionConfiguration()).dataTaskWithURL(url) { (data:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
+            do {
+                if let jsonData = data {
+                    let json = try NSJSONSerialization.JSONObjectWithData(jsonData, options: .MutableContainers) as? NSDictionary
+                    
+                    guard let list = json!["list"] as? NSArray,
+                          let item1 = list[0] as? NSDictionary,
+                          let item2 = list[1] as? NSDictionary,
+                    	  let time1 = item1["dt"] as? NSNumber,
+	                      let time2 = item2["dt"] as? NSNumber,
+                          let temps1 = item1["temp"] as? NSDictionary,
+                          let temps2 = item2["temp"] as? NSDictionary,
+                    	  let tempMax1 = temps1["max"] as? NSNumber,
+                       	  let tempMin1 = temps1["min"] as? NSNumber,
+                          let tempMax2 = temps2["max"] as? NSNumber,
+                          let tempMin2 = temps2["min"] as? NSNumber,
+                          let weatherArray1 = item1["weather"] as? NSArray,
+		                  let weatherArray2 = item2["weather"] as? NSArray,
+                    	  let weatherItem1 = weatherArray1[0] as? NSDictionary,
+                       	  let weatherItem2 = weatherArray2[0] as? NSDictionary,
+                    	  let weatherDesc1 = weatherItem1["description"] as? String,
+	                      let weatherDesc2 = weatherItem2["description"] as? String,
+                          let weatherIcon1 = weatherItem1["icon"] as? String,
+                          let weatherIcon2 = weatherItem2["icon"] as? String
+                    else {
+                        throw WeatherError.MissingForecast
                     }
+                    
+                    self.weatherArray.append(["Day":weatherIcon1,"Night":weatherIcon2,"High":tempMax1.stringValue,"Low":tempMin1.stringValue,"Text":"\(weatherDesc1)\n\(weatherDesc2)"])
+                    
+                    if self.tripArray.count == self.tripCount {
+                       dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                           self.tableView.reloadData()
+                       })
+                    }
+                } else {
+                    throw error!
+                }
 //                } catch WeatherError.InvalidJSON {
 //                    print("Special actions for this error.")
-                } catch {
-                    self.showError(error)
-                }
+            } catch {
+                self.showError(error)
             }
-            
-            dataTask.resume()
         }
+        
+        dataTask.resume()
     }
     
     func showError(error:ErrorType)

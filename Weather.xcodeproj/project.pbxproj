@@ -93,7 +93,6 @@
 		18CEB04E1B6A740F00190016 = {
 			isa = PBXGroup;
 			children = (
-				189C61D21B726AA6008A6431 /* SafariServices.framework */,
 				18CEB05A1B6A740F00190016 /* AppDelegate.swift */,
 				18CEB05E1B6A740F00190016 /* Main.storyboard */,
 				18CEB0611B6A740F00190016 /* Weather.xcdatamodeld */,
@@ -106,6 +105,7 @@
 				18CEB0661B6A740F00190016 /* LaunchScreen.storyboard */,
 				18CEB0691B6A740F00190016 /* Info.plist */,
 				189C61CE1B724D71008A6431 /* MapKit.framework */,
+				189C61D21B726AA6008A6431 /* SafariServices.framework */,
 				18CEB0711B6A740F00190016 /* WeatherTests */,
 				18CEB07C1B6A740F00190016 /* WeatherUITests */,
 				18CEB0581B6A740F00190016 /* Products */,
