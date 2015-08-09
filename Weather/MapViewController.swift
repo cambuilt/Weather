@@ -38,7 +38,7 @@ class MapViewController : UIViewController, SFSafariViewControllerDelegate
     
     @IBAction func didTapWeb(sender: AnyObject)
     {
-        let criteria = navigationItem.title!.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+        let criteria = navigationItem.title!.stringByAddingPercentEncodingWithAllowedCharacters(.alphanumericCharacterSet())!
         let url = "https://duckduckgo.com/?q=\(criteria)"
         let safariViewController = SFSafariViewController(URL: NSURL(string: url)!)
         safariViewController.delegate = self

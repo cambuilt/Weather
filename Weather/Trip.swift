@@ -17,7 +17,8 @@ class Trip: NSManagedObject
         let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         let trip = NSEntityDescription.insertNewObjectForEntityForName("Trip", inManagedObjectContext: managedObjectContext) as! Trip
         let dateFormat = NSDateFormatter()
-        dateFormat.dateFormat = "MM/dd/YYYY"
+        dateFormat.dateFormat = "YYYYMMdd"
+        dateFormat.timeZone = NSTimeZone.localTimeZone()
         trip.city = city
         trip.state = state
         trip.country = country
