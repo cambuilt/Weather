@@ -196,6 +196,7 @@ class TripTableViewController : UITableViewController
                         dateFormat.timeZone = NSTimeZone.localTimeZone()
                         let tripDateString = dateFormat.stringFromDate(trip.startDate!)
                         let tripKey:String
+                        dateFormat.dateFormat = "MM/dd/YYYY h aaa"
                         
                         if trip.state.characters.count == 0 {
                             tripKey = "\(trip.city), \(trip.country)"
@@ -208,7 +209,7 @@ class TripTableViewController : UITableViewController
                             	let itemDate = NSDate(timeIntervalSince1970: itemDateUnix.doubleValue)
                                 dateFormat.dateFormat = "MM/dd/YYYY"
                                 let itemDateString = dateFormat.stringFromDate(itemDate)
-                                if itemDateString == tripDateString && elementArray.count < 7 {
+                                if itemDateString == tripDateString && elementArray.count < 6 {
                                     guard let main = item["main"] as? NSDictionary,
                                       	let tempMax = main["temp_max"] as? NSNumber,
                                        	let tempMin = main["temp_min"] as? NSNumber,
@@ -224,10 +225,8 @@ class TripTableViewController : UITableViewController
                                     let time = dateFormat.stringFromDate(itemDate)
                                     let tempAvg = (tempMax.integerValue - (tempMax.integerValue - tempMin.integerValue) / 2 as NSNumber).stringValue
                                     
-                                    if elementArray.count < 6 {
+                                    if itemDate.timeIntervalSinceDate(trip.startDate!) > 18000 {
                                     	elementArray.append(["Time":time,"TempAvg":tempAvg,"Description":weatherDesc,"Icon":weatherIcon])
-                                    } else {
-                                        print(itemDate)
                                     }
                                 }
                             }
