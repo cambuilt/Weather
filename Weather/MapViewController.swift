@@ -10,11 +10,11 @@ import UIKit
 import MapKit
 import SafariServices
 
-class MapViewController : UIViewController, SFSafariViewControllerDelegate
+class MapViewController : UIViewController, SFSafariViewControllerDelegate, CLLocationManagerDelegate
 {
     @IBOutlet weak var mapView: MKMapView!
     let zoomDelta = 0.1
-    
+
     func centerMapOnCity(locationName:String)
     {
         CLGeocoder().geocodeAddressString(locationName) { (placemarks:[CLPlacemark]?, error:NSError?) -> Void in
@@ -29,10 +29,6 @@ class MapViewController : UIViewController, SFSafariViewControllerDelegate
                     region.span.latitudeDelta = self.zoomDelta
                     region.span.longitudeDelta = self.zoomDelta
                     self.mapView?.setRegion(region, animated: true)
-                    
-//                    if locationName == "Washington, DC" {
-//                        self.mapView?.showsUserLocation = true
-//                    }
                 }
             } else {
                 print(error)

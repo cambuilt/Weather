@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18176DC91B7A898A003468DA /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18176DC71B7A898A003468DA /* iPhone.storyboard */; };
+		18176DCB1B7A90C8003468DA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18176DCA1B7A90C8003468DA /* CoreLocation.framework */; };
 		189C61C71B724BF6008A6431 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189C61C61B724BF6008A6431 /* MapViewController.swift */; };
 		189C61C91B724C40008A6431 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189C61C81B724C40008A6431 /* Trip.swift */; };
 		189C61CB1B724C4A008A6431 /* Trip+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189C61CA1B724C4A008A6431 /* Trip+CoreDataProperties.swift */; };
@@ -21,7 +23,6 @@
 		18CEB0731B6A740F00190016 /* WeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CEB0721B6A740F00190016 /* WeatherTests.swift */; };
 		18CEB07E1B6A740F00190016 /* WeatherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CEB07D1B6A740F00190016 /* WeatherUITests.swift */; };
 		18CEB08C1B6A749500190016 /* TripTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CEB08B1B6A749400190016 /* TripTableViewController.swift */; };
-		18DE9B951B79024600FDE698 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18DE9B931B79024600FDE698 /* iPhone.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		18176DC81B7A898A003468DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Weather/Base.lproj/iPhone.storyboard; sourceTree = "<group>"; };
+		18176DCA1B7A90C8003468DA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		189C61C61B724BF6008A6431 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = Weather/MapViewController.swift; sourceTree = "<group>"; };
 		189C61C81B724C40008A6431 /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Trip.swift; path = Weather/Trip.swift; sourceTree = "<group>"; };
 		189C61CA1B724C4A008A6431 /* Trip+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Trip+CoreDataProperties.swift"; path = "Weather/Trip+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -62,7 +65,6 @@
 		18CEB07D1B6A740F00190016 /* WeatherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherUITests.swift; sourceTree = "<group>"; };
 		18CEB07F1B6A740F00190016 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18CEB08B1B6A749400190016 /* TripTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TripTableViewController.swift; path = Weather/TripTableViewController.swift; sourceTree = "<group>"; };
-		18DE9B941B79024600FDE698 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Weather/Base.lproj/iPhone.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18176DCB1B7A90C8003468DA /* CoreLocation.framework in Frameworks */,
 				189C61D31B726AA6008A6431 /* SafariServices.framework in Frameworks */,
 				189C61CF1B724D71008A6431 /* MapKit.framework in Frameworks */,
 			);
@@ -97,7 +100,7 @@
 			children = (
 				18CEB05A1B6A740F00190016 /* AppDelegate.swift */,
 				18CEB05E1B6A740F00190016 /* Main.storyboard */,
-				18DE9B931B79024600FDE698 /* iPhone.storyboard */,
+				18176DC71B7A898A003468DA /* iPhone.storyboard */,
 				18CEB0611B6A740F00190016 /* Weather.xcdatamodeld */,
 				189C61C81B724C40008A6431 /* Trip.swift */,
 				189C61CA1B724C4A008A6431 /* Trip+CoreDataProperties.swift */,
@@ -107,6 +110,7 @@
 				18CEB0641B6A740F00190016 /* Assets.xcassets */,
 				18CEB0661B6A740F00190016 /* LaunchScreen.storyboard */,
 				18CEB0691B6A740F00190016 /* Info.plist */,
+				18176DCA1B7A90C8003468DA /* CoreLocation.framework */,
 				189C61CE1B724D71008A6431 /* MapKit.framework */,
 				189C61D21B726AA6008A6431 /* SafariServices.framework */,
 				18CEB0711B6A740F00190016 /* WeatherTests */,
@@ -250,7 +254,7 @@
 				18CEB0681B6A740F00190016 /* LaunchScreen.storyboard in Resources */,
 				18CEB0651B6A740F00190016 /* Assets.xcassets in Resources */,
 				18CEB0601B6A740F00190016 /* Main.storyboard in Resources */,
-				18DE9B951B79024600FDE698 /* iPhone.storyboard in Resources */,
+				18176DC91B7A898A003468DA /* iPhone.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,6 +321,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		18176DC71B7A898A003468DA /* iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18176DC81B7A898A003468DA /* Base */,
+			);
+			name = iPhone.storyboard;
+			sourceTree = "<group>";
+		};
 		18CEB05E1B6A740F00190016 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -333,14 +345,6 @@
 			);
 			name = LaunchScreen.storyboard;
 			path = Weather;
-			sourceTree = "<group>";
-		};
-		18DE9B931B79024600FDE698 /* iPhone.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				18DE9B941B79024600FDE698 /* Base */,
-			);
-			name = iPhone.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
