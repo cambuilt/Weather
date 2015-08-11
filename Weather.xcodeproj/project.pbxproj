@@ -21,6 +21,7 @@
 		18CEB0731B6A740F00190016 /* WeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CEB0721B6A740F00190016 /* WeatherTests.swift */; };
 		18CEB07E1B6A740F00190016 /* WeatherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CEB07D1B6A740F00190016 /* WeatherUITests.swift */; };
 		18CEB08C1B6A749500190016 /* TripTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CEB08B1B6A749400190016 /* TripTableViewController.swift */; };
+		18DE9B951B79024600FDE698 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18DE9B931B79024600FDE698 /* iPhone.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		18CEB07D1B6A740F00190016 /* WeatherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherUITests.swift; sourceTree = "<group>"; };
 		18CEB07F1B6A740F00190016 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18CEB08B1B6A749400190016 /* TripTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TripTableViewController.swift; path = Weather/TripTableViewController.swift; sourceTree = "<group>"; };
+		18DE9B941B79024600FDE698 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Weather/Base.lproj/iPhone.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 			children = (
 				18CEB05A1B6A740F00190016 /* AppDelegate.swift */,
 				18CEB05E1B6A740F00190016 /* Main.storyboard */,
+				18DE9B931B79024600FDE698 /* iPhone.storyboard */,
 				18CEB0611B6A740F00190016 /* Weather.xcdatamodeld */,
 				189C61C81B724C40008A6431 /* Trip.swift */,
 				189C61CA1B724C4A008A6431 /* Trip+CoreDataProperties.swift */,
@@ -247,6 +250,7 @@
 				18CEB0681B6A740F00190016 /* LaunchScreen.storyboard in Resources */,
 				18CEB0651B6A740F00190016 /* Assets.xcassets in Resources */,
 				18CEB0601B6A740F00190016 /* Main.storyboard in Resources */,
+				18DE9B951B79024600FDE698 /* iPhone.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +333,14 @@
 			);
 			name = LaunchScreen.storyboard;
 			path = Weather;
+			sourceTree = "<group>";
+		};
+		18DE9B931B79024600FDE698 /* iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18DE9B941B79024600FDE698 /* Base */,
+			);
+			name = iPhone.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

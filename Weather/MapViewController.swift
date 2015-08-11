@@ -29,6 +29,10 @@ class MapViewController : UIViewController, SFSafariViewControllerDelegate
                     region.span.latitudeDelta = self.zoomDelta
                     region.span.longitudeDelta = self.zoomDelta
                     self.mapView?.setRegion(region, animated: true)
+                    
+//                    if locationName == "Washington, DC" {
+//                        self.mapView?.showsUserLocation = true
+//                    }
                 }
             } else {
                 print(error)
