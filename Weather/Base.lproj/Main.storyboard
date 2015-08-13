@@ -21,14 +21,24 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="99.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="City Name" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OGf-MP-Dyj">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OGf-MP-Dyj">
                                             <rect key="frame" x="8" y="8" width="89.5" height="20"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="70" id="Gbz-9d-1nL"/>
+                                                <constraint firstAttribute="height" constant="40" id="QKI-Wa-W9T"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="QKI-Wa-W9T"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="widthClass=compact">
+                                                <mask key="constraints">
+                                                    <include reference="QKI-Wa-W9T"/>
+                                                </mask>
+                                            </variation>
                                         </label>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather Report" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ml0-5q-6yi" userLabel="Weather Report Label">
                                             <rect key="frame" x="8" y="29" width="89.5" height="14.5"/>
@@ -72,7 +82,7 @@
                                                 </constraint>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="8"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="76°F" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cmP-FA-F6i" userLabel="Temp Label 4">
@@ -84,7 +94,7 @@
                                                 <constraint firstAttribute="height" constant="16" id="bes-zd-QmU"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="8"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="13" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="76°F" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iL1-u5-1q2" userLabel="Temp Label 5">
@@ -96,7 +106,7 @@
                                                 </constraint>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="8"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="16" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="76°F" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ngs-5V-a7k" userLabel="Temp Label 6">
@@ -108,7 +118,7 @@
                                                 </constraint>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="8"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="03n" translatesAutoresizingMaskIntoConstraints="NO" id="e1b-BP-jvR" userLabel="Image View 1">
@@ -213,7 +223,7 @@
                                                 <constraint firstAttribute="height" constant="16" id="xik-qX-JyK"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="8"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="12" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="12 PM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h61-8T-zT9" userLabel="Time Label 4">
@@ -225,7 +235,7 @@
                                                 <constraint firstAttribute="height" constant="16" id="K51-z7-2T3"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="8"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="15" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="12 PM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bCF-0o-HWn" userLabel="Time Label 5">
@@ -237,7 +247,7 @@
                                                 <constraint firstAttribute="height" constant="16" id="HbU-x7-Xsv"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="8"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="18" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="12 PM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c7f-Xf-M3u" userLabel="Time Label 6">
@@ -249,7 +259,7 @@
                                                 <constraint firstAttribute="height" constant="16" id="m8w-kZ-oC9"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="8"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -278,6 +288,7 @@
                                         <constraint firstItem="ml0-5q-6yi" firstAttribute="width" secondItem="OGf-MP-Dyj" secondAttribute="width" id="JNz-WN-hxy"/>
                                         <constraint firstItem="SkA-TN-fuT" firstAttribute="leading" secondItem="BHu-fd-3gm" secondAttribute="trailing" constant="8" symbolic="YES" id="L95-wO-MPQ"/>
                                         <constraint firstItem="ltE-4I-3zh" firstAttribute="top" secondItem="OGf-MP-Dyj" secondAttribute="bottom" priority="900" constant="-8" id="OEY-NU-b99">
+                                            <variation key="widthClass=compact" constant="-18"/>
                                             <variation key="heightClass=regular-widthClass=compact" constant="3"/>
                                         </constraint>
                                         <constraint firstItem="SkA-TN-fuT" firstAttribute="top" secondItem="e1b-BP-jvR" secondAttribute="top" id="QMj-Su-b8e"/>
@@ -328,8 +339,8 @@
                                         <mask key="constraints">
                                             <exclude reference="pez-Jj-Z7T"/>
                                             <exclude reference="xJm-jQ-9Al"/>
-                                            <exclude reference="Hn4-3z-PCG"/>
                                             <exclude reference="B2z-Js-jXZ"/>
+                                            <exclude reference="Hn4-3z-PCG"/>
                                             <exclude reference="p7f-Hr-zwc"/>
                                         </mask>
                                     </variation>
@@ -337,8 +348,8 @@
                                         <mask key="constraints">
                                             <include reference="pez-Jj-Z7T"/>
                                             <include reference="xJm-jQ-9Al"/>
-                                            <include reference="Hn4-3z-PCG"/>
                                             <include reference="B2z-Js-jXZ"/>
+                                            <include reference="Hn4-3z-PCG"/>
                                             <include reference="p7f-Hr-zwc"/>
                                         </mask>
                                     </variation>
@@ -386,7 +397,7 @@
             <objects>
                 <viewController id="HtF-we-489" customClass="MapViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
                     <mapView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="LVa-PV-iJE">
-                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <connections>
                             <outlet property="delegate" destination="HtF-we-489" id="z9s-FC-hDh"/>

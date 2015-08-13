@@ -20,8 +20,8 @@ enum WeatherError : ErrorType
 class TripTableViewController : UITableViewController
 {
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-    var tripArray = [Trip]()
-    var tripCount = 0
+    var trips = [Trip]()
+    var weatherCounter = 0
     var weatherDictionary = [String:[[String:String]]]()
     var loadMode = false
     var alert:UIAlertController!
@@ -62,12 +62,10 @@ class TripTableViewController : UITableViewController
         let request = NSFetchRequest(entityName: "Trip")
         
         do {
-            let trips = try managedObjectContext.executeFetchRequest(request) as! [Trip]
-            tripCount = trips.count
+            trips = try managedObjectContext.executeFetchRequest(request) as! [Trip]
             
             for trip in trips {
                 do {
-                    self.tripArray.append(trip)
                     try getWeather(trip)
                 } catch {
                     print("getWeather error: \(error)")
@@ -105,7 +103,7 @@ class TripTableViewController : UITableViewController
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return tripArray.count
+        return trips.count
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
@@ -118,13 +116,14 @@ class TripTableViewController : UITableViewController
         let cell = tableView.dequeueReusableCellWithIdentifier("TripCell", forIndexPath: indexPath) as! TripCell
         let tripKey:String
         
-        if tripArray[indexPath.row].state.characters.count == 0 {
-            tripKey = "\(tripArray[indexPath.row].city), \(tripArray[indexPath.row].country)"
+        if trips[indexPath.row].state.characters.count == 0 {
+            tripKey = "\(trips[indexPath.row].city), \(trips[indexPath.row].country)"
         } else {
-            tripKey = "\(tripArray[indexPath.row].city), \(tripArray[indexPath.row].state)"
+            tripKey = "\(trips[indexPath.row].city), \(trips[indexPath.row].state)"
         }
         
         cell.cityNameLabel.text = tripKey
+        cell.cityNameLabel.sizeToFit()
         
         if let weatherAttributes = weatherDictionary[tripKey] as [[String:String]]? {
             if indexPath.row < weatherDictionary.keys.count {
@@ -146,6 +145,15 @@ class TripTableViewController : UITableViewController
                     timeLabel.text = ""
                 }
             }
+        } else {
+            for index in 0..<6 {
+                let tempLabel = cell.viewWithTag(index * 3 + 1) as! UILabel
+                tempLabel.text = ""
+                let imageView = cell.viewWithTag(index * 3 + 2) as! UIImageView
+                imageView.image = nil
+                let timeLabel = cell.viewWithTag(index * 3 + 3) as! UILabel
+                timeLabel.text = ""
+            }
         }
         
         return cell
@@ -160,7 +168,7 @@ class TripTableViewController : UITableViewController
     {
         if segue.identifier == "MapSegue" {
             if let indexPath = tableView.indexPathForSelectedRow {
-                let locationName = "\(tripArray[indexPath.row].city), \(tripArray[indexPath.row].state)"
+                let locationName = "\(trips[indexPath.row].city), \(trips[indexPath.row].state)"
                 if let mapViewController = segue.destinationViewController as? MapViewController {
                     mapViewController.navigationItem.title = locationName
                     mapViewController.centerMapOnCity(locationName)
@@ -197,7 +205,6 @@ class TripTableViewController : UITableViewController
                         dateFormat.timeZone = NSTimeZone.localTimeZone()
                         let tripDateString = dateFormat.stringFromDate(trip.startDate!)
                         let tripKey:String
-                        dateFormat.dateFormat = "MM/dd/YYYY h aaa"
                         
                         if trip.state.characters.count == 0 {
                             tripKey = "\(trip.city), \(trip.country)"
@@ -236,9 +243,11 @@ class TripTableViewController : UITableViewController
                         if elementArray.count > 0 {
                         	self.weatherDictionary[tripKey] = elementArray
                         }
+                        
+                        self.weatherCounter++
                 	}
                     
-                    if self.tripArray.count == self.tripCount {
+                    if self.weatherCounter == self.trips.count {
                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
                            self.tableView.reloadData()
                        })
