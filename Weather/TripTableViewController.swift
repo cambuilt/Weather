@@ -44,14 +44,14 @@ class TripTableViewController : UITableViewController
     func loadTrips()
     {
         do {
-            try Trip.addTrip("New York", state: "NY", country: "US", startDate: "20150812", endDate: "20150815", latitude: 40.713054, longitude: -74.007228)
-            try Trip.addTrip("Kitty Hawk", state: "NC", country: "US", startDate: "20150812", endDate: "20150815", latitude: 36.066357, longitude: -75.693523)
-            try Trip.addTrip("Freeport", state: "", country: "The Bahamas", startDate: "20150812", endDate: "20150815", latitude: 26.548167, longitude: -78.696324)
-            try Trip.addTrip("Barrow", state: "AK", country: "US", startDate: "20150812", endDate: "20150815", latitude: 71.298000, longitude: -156.766389)
-            try Trip.addTrip("Nuuk", state: "", country: "Greenland", startDate: "20150812", endDate: "20150815", latitude: 64.183877, longitude: -51.707876)
-            try Trip.addTrip("Washington", state: "DC", country: "US", startDate: "20150812", endDate: "20150815", latitude: 38.892062, longitude: -77.019912)
-            try Trip.addTrip("Hong Kong", state: "", country: "China", startDate: "20150812", endDate: "20150815", latitude: 22.358535, longitude: 114.142271)
-            try Trip.addTrip("Moscow", state: "", country: "Russia", startDate: "20150812", endDate: "20150815", latitude: 55.752222, longitude: 37.615556)
+            try Trip.addTrip("New York", state: "NY", country: "US", startDate: "20150901", endDate: "20150902", latitude: 40.713054, longitude: -74.007228)
+            try Trip.addTrip("Kitty Hawk", state: "NC", country: "US", startDate: "20150901", endDate: "20150902", latitude: 36.066357, longitude: -75.693523)
+            try Trip.addTrip("Freeport", state: "", country: "The Bahamas", startDate: "20150901", endDate: "20150902", latitude: 26.548167, longitude: -78.696324)
+            try Trip.addTrip("Barrow", state: "AK", country: "US", startDate: "20150901", endDate: "20150902", latitude: 71.298000, longitude: -156.766389)
+            try Trip.addTrip("Nuuk", state: "", country: "Greenland", startDate: "20150901", endDate: "20150902", latitude: 64.183877, longitude: -51.707876)
+            try Trip.addTrip("Washington", state: "DC", country: "US", startDate: "20150901", endDate: "20150902", latitude: 38.892062, longitude: -77.019912)
+            try Trip.addTrip("Hong Kong", state: "", country: "China", startDate: "20150901", endDate: "20150902", latitude: 22.358535, longitude: 114.142271)
+            try Trip.addTrip("Moscow", state: "", country: "Russia", startDate: "20150901", endDate: "20150902", latitude: 55.752222, longitude: 37.615556)
         } catch {
             print(error)
         }

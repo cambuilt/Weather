@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8173.3" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8187.4" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8142"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8151.3"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -21,8 +21,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="99.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="City Name" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OGf-MP-Dyj">
-                                            <rect key="frame" x="8" y="8" width="89.5" height="20"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City Name" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OGf-MP-Dyj">
+                                            <rect key="frame" x="8" y="8" width="85" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="Gbz-9d-1nL"/>
                                             </constraints>
@@ -228,6 +228,7 @@
                                         <constraint firstItem="SkA-TN-fuT" firstAttribute="top" secondItem="e1b-BP-jvR" secondAttribute="top" id="QMj-Su-b8e"/>
                                         <constraint firstItem="e1b-BP-jvR" firstAttribute="top" secondItem="NdC-De-ogN" secondAttribute="topMargin" constant="12" id="Rg5-yu-fZG"/>
                                         <constraint firstItem="cmP-FA-F6i" firstAttribute="leading" secondItem="pdT-Et-DrM" secondAttribute="trailing" constant="7" id="SO3-bv-Ddu"/>
+                                        <constraint firstItem="JBk-K6-qpn" firstAttribute="leading" secondItem="e1b-BP-jvR" secondAttribute="leading" id="SXJ-K0-vVj"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="e1b-BP-jvR" secondAttribute="trailing" constant="174" id="UZh-gQ-TQA"/>
                                         <constraint firstItem="JBk-K6-qpn" firstAttribute="top" secondItem="NdC-De-ogN" secondAttribute="topMargin" constant="42" id="V4B-NF-uHd">
                                             <variation key="widthClass=compact" constant="33"/>
@@ -236,6 +237,7 @@
                                             <variation key="widthClass=compact" constant="4"/>
                                         </constraint>
                                         <constraint firstItem="OGf-MP-Dyj" firstAttribute="width" secondItem="NdC-De-ogN" secondAttribute="width" constant="-220" id="ZZ7-Eo-bws"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="iL1-u5-1q2" secondAttribute="trailing" constant="32" id="e9I-AR-D1Y"/>
                                         <constraint firstItem="BHu-fd-3gm" firstAttribute="top" secondItem="e1b-BP-jvR" secondAttribute="top" priority="900" id="fOk-Q8-YPd"/>
                                         <constraint firstItem="OGf-MP-Dyj" firstAttribute="top" secondItem="NdC-De-ogN" secondAttribute="topMargin" id="gs9-m7-s28"/>
                                         <constraint firstItem="8Sa-zn-Qe1" firstAttribute="leading" secondItem="7Js-ZQ-QKG" secondAttribute="trailing" constant="2" id="hTL-pF-tpK">
@@ -246,6 +248,7 @@
                                         <constraint firstItem="HLe-Tw-eap" firstAttribute="top" secondItem="e1b-BP-jvR" secondAttribute="top" id="mqn-fv-Ouo"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="7Js-ZQ-QKG" secondAttribute="trailing" constant="172" id="mta-R1-HCV"/>
                                         <constraint firstItem="yuq-9E-2GF" firstAttribute="leading" secondItem="SkA-TN-fuT" secondAttribute="trailing" constant="8" symbolic="YES" id="ssc-p6-Jzs"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="bCF-0o-HWn" secondAttribute="trailing" constant="37" id="t8A-dE-lch"/>
                                         <constraint firstItem="pdT-Et-DrM" firstAttribute="leading" secondItem="8Sa-zn-Qe1" secondAttribute="trailing" constant="16" id="tbR-d7-JIa">
                                             <variation key="widthClass=compact" constant="8"/>
                                         </constraint>
@@ -266,16 +269,16 @@
                                         <mask key="constraints">
                                             <exclude reference="ZZ7-Eo-bws"/>
                                             <exclude reference="UZh-gQ-TQA"/>
-                                            <exclude reference="mta-R1-HCV"/>
                                             <exclude reference="HSQ-Tb-dRS"/>
+                                            <exclude reference="mta-R1-HCV"/>
                                         </mask>
                                     </variation>
                                     <variation key="widthClass=compact">
                                         <mask key="constraints">
                                             <include reference="ZZ7-Eo-bws"/>
                                             <include reference="UZh-gQ-TQA"/>
-                                            <include reference="mta-R1-HCV"/>
                                             <include reference="HSQ-Tb-dRS"/>
+                                            <include reference="mta-R1-HCV"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
