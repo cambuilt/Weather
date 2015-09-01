@@ -28,30 +28,49 @@ class TripTableViewController : UITableViewController
     var chosenDate:NSDate!
     var alertShown = false
     let apiKey = "68be623fd62b72cc6068bec1815deae4"
+    var refreshing = false
+    let spinner = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
 
     override func viewDidLoad()
     {
         let secondsInADay = 86400.0
-        chosenDate = NSDate().dateByAddingTimeInterval(secondsInADay)
+        chosenDate = NSDate().dateByAddingTimeInterval(secondsInADay * 3)
         
         if loadMode == true {
             loadTrips()
         } else {
             getTrips()
         }
+        
+        spinner.frame = CGRect(x: tableView.frame.size.width / 2 - 20, y: -80, width: 40, height: 40)
+        view.insertSubview(spinner, aboveSubview: tableView)
+    }
+    
+    override func scrollViewDidScroll(scrollView: UIScrollView)
+    {
+        if scrollView.contentOffset.y < -80 {
+            if refreshing == false {
+                refreshing = true
+                spinner.startAnimating()
+                getTrips()
+            }
+        } else {
+            refreshing = false
+            spinner.stopAnimating()
+        }
     }
 
     func loadTrips()
     {
         do {
-            try Trip.addTrip("New York", state: "NY", country: "US", startDate: "20150901", endDate: "20150902", latitude: 40.713054, longitude: -74.007228)
-            try Trip.addTrip("Kitty Hawk", state: "NC", country: "US", startDate: "20150901", endDate: "20150902", latitude: 36.066357, longitude: -75.693523)
-            try Trip.addTrip("Freeport", state: "", country: "The Bahamas", startDate: "20150901", endDate: "20150902", latitude: 26.548167, longitude: -78.696324)
-            try Trip.addTrip("Barrow", state: "AK", country: "US", startDate: "20150901", endDate: "20150902", latitude: 71.298000, longitude: -156.766389)
-            try Trip.addTrip("Nuuk", state: "", country: "Greenland", startDate: "20150901", endDate: "20150902", latitude: 64.183877, longitude: -51.707876)
-            try Trip.addTrip("Washington", state: "DC", country: "US", startDate: "20150901", endDate: "20150902", latitude: 38.892062, longitude: -77.019912)
-            try Trip.addTrip("Hong Kong", state: "", country: "China", startDate: "20150901", endDate: "20150902", latitude: 22.358535, longitude: 114.142271)
-            try Trip.addTrip("Moscow", state: "", country: "Russia", startDate: "20150901", endDate: "20150902", latitude: 55.752222, longitude: 37.615556)
+            try Trip.addTrip("New York", state: "NY", country: "US", startDate: "20150904", endDate: "20150906", latitude: 40.713054, longitude: -74.007228)
+            try Trip.addTrip("Kitty Hawk", state: "NC", country: "US", startDate: "20150904", endDate: "20150906", latitude: 36.066357, longitude: -75.693523)
+            try Trip.addTrip("Freeport", state: "", country: "The Bahamas", startDate: "20150904", endDate: "20150906", latitude: 26.548167, longitude: -78.696324)
+            try Trip.addTrip("Barrow", state: "AK", country: "US", startDate: "20150904", endDate: "20150906", latitude: 71.298000, longitude: -156.766389)
+            try Trip.addTrip("Nuuk", state: "", country: "Greenland", startDate: "20150904", endDate: "20150906", latitude: 64.183877, longitude: -51.707876)
+            try Trip.addTrip("Washington", state: "DC", country: "US", startDate: "20150904", endDate: "20150906", latitude: 38.892062, longitude: -77.019912)
+            try Trip.addTrip("Hong Kong", state: "", country: "China", startDate: "20150904", endDate: "20150906", latitude: 22.358535, longitude: 114.142271)
+            try Trip.addTrip("Moscow", state: "", country: "Russia", startDate: "20150904", endDate: "20150906", latitude: 55.752222, longitude: 37.615556)
         } catch {
             print(error)
         }
